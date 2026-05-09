@@ -104,7 +104,7 @@ const propertySchema = new Schema(
 		isFeatured: { type: Boolean, default: false },
 		isPremium: { type: Boolean, default: false },
 		isVerified: { type: Boolean, default: false },
-		isApproved: { type: Boolean, default: false },
+		isApproved: { type: Boolean, default: true },
 
 		views: { type: Number, default: 0 },
 		inquiries: { type: Number, default: 0 },

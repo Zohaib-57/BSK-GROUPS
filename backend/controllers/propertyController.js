@@ -173,7 +173,7 @@ export const getPropertyById = asyncHandler(async (req, res) => {
 
 export const createProperty = asyncHandler(async (req, res) => {
 	req.body.postedBy = req.user._id;
-	if (req.user.role === "admin") req.body.isApproved = true;
+	req.body.isApproved = true;
 
 	const property = await Property.create(req.body);
 	res.status(201).json({ success: true, property });
