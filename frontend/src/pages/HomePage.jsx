@@ -16,179 +16,6 @@ import {
 } from "lucide-react";
 import "./HomePage.css";
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-const DUMMY_PROPERTIES = [
-	{
-		_id: "1",
-		slug: "modern-5-marla-house-dha-peshawar",
-		title: "Modern 5-Marla House",
-		purpose: "sale",
-		type: "house",
-		price: 12500000,
-		area: { value: 5, unit: "Marla" },
-		location: { area: "DHA Phase 1", society: "DHA", city: "Peshawar" },
-		bedrooms: 4,
-		bathrooms: 3,
-		isFeatured: true,
-		isVerified: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "2",
-		slug: "luxury-10-marla-villa-hayatabad",
-		title: "Luxury 10-Marla Villa",
-		purpose: "sale",
-		type: "villa",
-		price: 28000000,
-		area: { value: 10, unit: "Marla" },
-		location: { area: "Phase 5", society: "Hayatabad", city: "Peshawar" },
-		bedrooms: 5,
-		bathrooms: 4,
-		isFeatured: true,
-		isPremium: true,
-		isVerified: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "3",
-		slug: "1-kanal-corner-plot-university-town",
-		title: "1-Kanal Corner Plot",
-		purpose: "sale",
-		type: "plot",
-		price: 18000000,
-		area: { value: 1, unit: "Kanal" },
-		location: { area: "Block C", society: "University Town", city: "Peshawar" },
-		bedrooms: null,
-		bathrooms: null,
-		isFeatured: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "4",
-		slug: "2-bed-luxury-apartment-gulberg",
-		title: "2-Bed Luxury Apartment",
-		purpose: "rent",
-		type: "apartment",
-		price: 45000,
-		priceType: "per_month",
-		area: { value: 1200, unit: "Sq Ft" },
-		location: { area: "Gulberg Greens", society: "Gulberg", city: "Peshawar" },
-		bedrooms: 2,
-		bathrooms: 2,
-		isFeatured: true,
-		isVerified: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "5",
-		slug: "commercial-shop-ring-road-peshawar",
-		title: "Commercial Shop Main Road",
-		purpose: "sale",
-		type: "commercial",
-		price: 8500000,
-		area: { value: 300, unit: "Sq Ft" },
-		location: {
-			area: "Ring Road",
-			society: "Ring Road Commercial",
-			city: "Peshawar",
-		},
-		bedrooms: null,
-		bathrooms: 1,
-		isFeatured: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "6",
-		slug: "7-marla-brand-new-house-naval-anchorage",
-		title: "7-Marla Brand New House",
-		purpose: "sale",
-		type: "house",
-		price: 19500000,
-		area: { value: 7, unit: "Marla" },
-		location: {
-			area: "Sector B",
-			society: "Naval Anchorage",
-			city: "Peshawar",
-		},
-		bedrooms: 4,
-		bathrooms: 4,
-		isFeatured: true,
-		isPremium: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "7",
-		slug: "5-marla-residential-plot-gulshan-usman",
-		title: "5-Marla Residential Plot",
-		purpose: "sale",
-		type: "plot",
-		price: 5200000,
-		area: { value: 5, unit: "Marla" },
-		location: { area: "Block A", society: "Gulshan-e-Usman", city: "Mardan" },
-		bedrooms: null,
-		bathrooms: null,
-		isFeatured: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-	{
-		_id: "8",
-		slug: "3-bed-furnished-apartment-f11-islamabad",
-		title: "3-Bed Furnished Apartment",
-		purpose: "rent",
-		type: "apartment",
-		price: 70000,
-		priceType: "per_month",
-		area: { value: 1800, unit: "Sq Ft" },
-		location: { area: "F-11 Markaz", society: "F-11", city: "Islamabad" },
-		bedrooms: 3,
-		bathrooms: 3,
-		isFeatured: true,
-		isVerified: true,
-		isPremium: true,
-		images: [
-			{
-				url: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
-				isMain: true,
-			},
-		],
-	},
-];
-
 const CATEGORIES = [
 	{
 		label: "Homes",
@@ -402,11 +229,15 @@ export default function HomePage() {
 					</div>
 
 					<div className="hp-properties-grid">
-						{(properties.length > 0 ? properties : DUMMY_PROPERTIES)
-							.slice(0, 8)
-							.map((p) => (
+						{properties.length > 0 ? (
+							properties.slice(0, 8).map((p) => (
 								<PropertyCard key={p._id} property={p} />
-							))}
+							))
+						) : (
+							<p className="text-center text-gray-500 py-10 col-span-full">
+								No featured properties available at the moment.
+							</p>
+						)}
 					</div>
 				</div>
 			</section>

@@ -19,17 +19,7 @@ import {
 } from "lucide-react";
 import styles from "./AgentProfilePage.module.css";
 
-/* ── Professional Dummy Agents (Same as AgentsPage for parity) ── */
-const DUMMY_AGENTS = {
-	"agent-1": { name: "Zarak Khan", phone: "+92 300 8585123", email: "zarak.khan@bskgroups.com", city: "Peshawar", listingsCount: 18, online: true, avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=512&h=512", role: "Executive Partner", dealsClosed: 142, experience: "12 Years", bio: "Leading expert in commercial and residential developments across KPK." },
-	"agent-2": { name: "Mehwish Bangash", phone: "+92 321 9988771", email: "mehwish.b@bskgroups.com", city: "Peshawar", listingsCount: 12, online: true, avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=512&h=512", role: "Senior Consultant", dealsClosed: 89, experience: "8 Years", bio: "Specializing in luxury villas and residential plots in Hayatabad." },
-	"agent-3": { name: "Hamza Durrani", phone: "+92 333 4445556", email: "hamza.d@bskgroups.com", city: "Islamabad", listingsCount: 25, online: false, avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=512&h=512", role: "Regional Manager", dealsClosed: 210, experience: "15 Years", bio: "Managing BSK's expansion into the capital's premium sectors." },
-	"agent-4": { name: "Sana Afridi", phone: "+92 345 1112233", email: "sana.afridi@bskgroups.com", city: "Peshawar", listingsCount: 9, online: true, avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=512&h=512", role: "Property Specialist", dealsClosed: 34, experience: "4 Years", bio: "Dedicated to finding the perfect family homes in Peshawar's suburbs." },
-	"agent-5": { name: "Salman Yousafzai", phone: "+92 311 5556677", email: "salman.y@bskgroups.com", city: "Peshawar", listingsCount: 21, online: false, avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=512&h=512", role: "Investment Advisor", dealsClosed: 115, experience: "10 Years", bio: "Expert in high-yield commercial investments and portfolio management." },
-	"agent-6": { name: "Zoya Shah", phone: "+92 301 2233445", email: "zoya.shah@bskgroups.com", city: "Mardan", listingsCount: 14, online: true, avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=512&h=512", role: "Residential Expert", dealsClosed: 67, experience: "7 Years", bio: "Focused on providing top-tier residential solutions in Mardan and surrounding areas." },
-	"agent-7": { name: "Asfandiyar Wali", phone: "+92 305 7788990", email: "asfand@bskgroups.com", city: "Peshawar", listingsCount: 32, online: true, avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=512&h=512", role: "Director of Sales", dealsClosed: 420, experience: "20 Years", bio: "Veteran sales leader with an unparalleled track record in Peshawar real estate." },
-	"agent-8": { name: "Khadija Bibi", phone: "+92 322 1122334", email: "khadija@bskgroups.com", city: "Nowshera", listingsCount: 7, online: true, avatar: "https://images.unsplash.com/photo-1598550874175-4d0fe4a2c90d?auto=format&fit=crop&w=512&h=512", role: "Client Success Manager", dealsClosed: 28, experience: "3 Years", bio: "Ensuring every client finds their dream home with a seamless transaction experience." },
-};
+
 
 export default function AgentProfilePage() {
 	const { id } = useParams();
@@ -53,9 +43,12 @@ export default function AgentProfilePage() {
 		);
 	}
 
-	/* Fallback logic */
-	const agentData = data?.agent || DUMMY_AGENTS[id] || DUMMY_AGENTS["agent-1"];
+	const agentData = data?.agent;
 	const properties = data?.properties || [];
+
+	if (!agentData) {
+		return <div className="p-20 text-center text-gray-500">Agent not found</div>;
+	}
 
 	// Prevent showing admin
 	if (agentData.role === 'admin') {

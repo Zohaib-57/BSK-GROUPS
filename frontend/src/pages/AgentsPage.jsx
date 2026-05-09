@@ -5,97 +5,7 @@ import api from "../utils/api";
 import { Phone, Mail, Building2, MapPin, ChevronRight, Users, Star, ShieldCheck } from "lucide-react";
 import styles from "./AgentsPage.module.css";
 
-/* ── Professional Dummy Agents (Luxury Editorial) ── */
-const DUMMY_AGENTS = [
-	{
-		_id: "agent-1",
-		name: "Zarak Khan",
-		phone: "+92 300 8585123",
-		email: "zarak.khan@bskgroups.com",
-		city: "Peshawar",
-		listingsCount: 18,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=256&h=256",
-		role: "Executive Partner"
-	},
-	{
-		_id: "agent-2",
-		name: "Mehwish Bangash",
-		phone: "+92 321 9988771",
-		email: "mehwish.b@bskgroups.com",
-		city: "Peshawar",
-		listingsCount: 12,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=256&h=256",
-		role: "Senior Consultant"
-	},
-	{
-		_id: "agent-3",
-		name: "Hamza Durrani",
-		phone: "+92 333 4445556",
-		email: "hamza.d@bskgroups.com",
-		city: "Islamabad",
-		listingsCount: 25,
-		online: false,
-		avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256",
-		role: "Regional Manager"
-	},
-	{
-		_id: "agent-4",
-		name: "Sana Afridi",
-		phone: "+92 345 1112233",
-		email: "sana.afridi@bskgroups.com",
-		city: "Peshawar",
-		listingsCount: 9,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=256&h=256",
-		role: "Property Specialist"
-	},
-	{
-		_id: "agent-5",
-		name: "Salman Yousafzai",
-		phone: "+92 311 5556677",
-		email: "salman.y@bskgroups.com",
-		city: "Peshawar",
-		listingsCount: 21,
-		online: false,
-		avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=256&h=256",
-		role: "Investment Advisor"
-	},
-	{
-		_id: "agent-6",
-		name: "Zoya Shah",
-		phone: "+92 301 2233445",
-		email: "zoya.shah@bskgroups.com",
-		city: "Mardan",
-		listingsCount: 14,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=256&h=256",
-		role: "Residential Expert"
-	},
-	{
-		_id: "agent-7",
-		name: "Asfandiyar Wali",
-		phone: "+92 305 7788990",
-		email: "asfand@bskgroups.com",
-		city: "Peshawar",
-		listingsCount: 32,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&h=256",
-		role: "Director of Sales"
-	},
-	{
-		_id: "agent-8",
-		name: "Khadija Bibi",
-		phone: "+92 322 1122334",
-		email: "khadija@bskgroups.com",
-		city: "Nowshera",
-		listingsCount: 7,
-		online: true,
-		avatar: "https://images.unsplash.com/photo-1598550874175-4d0fe4a2c90d?auto=format&fit=crop&w=256&h=256",
-		role: "Client Success Manager"
-	}
-];
+
 
 export default function AgentsPage() {
 	const { data, isLoading } = useQuery({
@@ -103,9 +13,7 @@ export default function AgentsPage() {
 		queryFn: () => api.get("/agents").then((r) => r.data),
 	});
 
-	/* Filter out admin and merge with dummy */
-	const realAgents = data?.agents?.filter((a) => a.role !== "admin") || [];
-	const agentList = !isLoading && realAgents.length > 0 ? realAgents : DUMMY_AGENTS;
+	const agentList = data?.agents?.filter((a) => a.role !== "admin") || [];
 
 	const totalListings = agentList.reduce(
 		(sum, a) => sum + (a.listingsCount ?? 0),
@@ -136,7 +44,6 @@ export default function AgentsPage() {
 						<span className={styles.statLabel}>Expert Agents</span>
 					</div>
 					<div className={styles.statItem}>
-						<span className={styles.statNum}>{totalListings}+</span>
 						<span className={styles.statValue}>{totalListings}</span>
 						<span className={styles.statLabel}>Properties Listed</span>
 					</div>
@@ -215,6 +122,11 @@ export default function AgentsPage() {
 								</div>
 							</Link>
 						))}
+						{agentList.length === 0 && (
+							<div className="col-span-full py-12 text-center text-gray-500">
+								No agents available at the moment.
+							</div>
+						)}
 					</div>
 				)}
 			</section>
