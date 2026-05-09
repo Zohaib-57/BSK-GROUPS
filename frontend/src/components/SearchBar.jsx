@@ -1,0 +1,206 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Search, MapPin, Home, ChevronDown } from "lucide-react";
+import styles from "./SearchBar.module.css";
+
+const CITIES = [
+	"Peshawar",
+	"Islamabad",
+	"Lahore",
+	"Karachi",
+	"Rawalpindi",
+	"Mardan",
+	"Abbottabad",
+];
+
+const PROPERTY_TYPES = [
+	{ value: "", label: "All Types" },
+	{ value: "house", label: "House" },
+	{ value: "apartment", label: "Apartment" },
+	{ value: "plot", label: "Plot" },
+	{ value: "commercial", label: "Commercial" },
+	{ value: "villa", label: "Villa" },
+	{ value: "farmhouse", label: "Farmhouse" },
+];
+
+export default function SearchBar({ hero = false }) {
+	const navigate = useNavigate();
+	const [purpose, setPurpose] = useState("sale");
+	const [type, setType] = useState("");
+	const [city, setCity] = useState("");
+	const [keyword, setKeyword] = useState("");
+
+	const handleSearch = (e) => {
+		e.preventDefault();
+		const params = new URLSearchParams();
+		params.set("purpose", purpose);
+		if (type) params.set("type", type);
+		if (city) params.set("city", city);
+		if (keyword.trim()) params.set("keyword", keyword.trim());
+		navigate(`/properties?${params.toString()}`);
+	};
+
+	return (
+		<form
+			className={`${styles.searchBar} ${hero ? styles.hero : ""}`}
+			onSubmit={handleSearch}
+		>
+			{/* ── Buy / Rent tabs ── */}
+			<div className={styles.tabs}>
+				<button
+					type="button"
+					className={`${styles.tab} ${purpose === "sale" ? styles.tabActive : ""}`}
+					onClick={() => setPurpose("sale")}
+				>
+					Buy
+				</button>
+				<button
+					type="button"
+					className={`${styles.tab} ${purpose === "rent" ? styles.tabActive : ""}`}
+					onClick={() => setPurpose("rent")}
+				>
+					Rent
+				</button>
+				<button
+					type="button"
+					className={`${styles.tab} ${purpose === "lease" ? styles.tabActive : ""}`}
+					onClick={() => setPurpose("lease")}
+				>
+					Lease
+				</button>
+			</div>
+
+			{/* ── Desktop inputs ── */}
+			<div className={styles.row}>
+				{/* Property Type */}
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<Home size={11} /> Property Type
+					</label>
+					<div className={styles.selectWrap}>
+						<select
+							className={styles.select}
+							value={type}
+							onChange={(e) => setType(e.target.value)}
+						>
+							{PROPERTY_TYPES.map((t) => (
+								<option key={t.value} value={t.value}>
+									{t.label}
+								</option>
+							))}
+						</select>
+						<ChevronDown size={14} className={styles.selectArrow} />
+					</div>
+				</div>
+
+				<div className={styles.divider} />
+
+				{/* City */}
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<MapPin size={11} /> City
+					</label>
+					<div className={styles.selectWrap}>
+						<select
+							className={styles.select}
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
+						>
+							<option value="">All Cities</option>
+							{CITIES.map((c) => (
+								<option key={c} value={c}>
+									{c}
+								</option>
+							))}
+						</select>
+						<ChevronDown size={14} className={styles.selectArrow} />
+					</div>
+				</div>
+
+				<div className={styles.divider} />
+
+				{/* Keyword */}
+				<div className={`${styles.field} ${styles.fieldGrow}`}>
+					<label className={styles.label}>
+						<Search size={11} /> Keyword
+					</label>
+					<input
+						type="text"
+						placeholder="Area, project, society…"
+						className={styles.input}
+						value={keyword}
+						onChange={(e) => setKeyword(e.target.value)}
+					/>
+				</div>
+
+				{/* Submit */}
+				<button type="submit" className={styles.submitBtn}>
+					<Search size={18} />
+					<span>Find Properties</span>
+				</button>
+			</div>
+
+			{/* ── Mobile inputs ── */}
+			<div className={styles.mobileBody}>
+				<div className={styles.mobileField}>
+					<label className={styles.label}>
+						<Home size={11} /> Property Type
+					</label>
+					<div className={styles.selectWrap}>
+						<select
+							className={styles.select}
+							value={type}
+							onChange={(e) => setType(e.target.value)}
+						>
+							{PROPERTY_TYPES.map((t) => (
+								<option key={t.value} value={t.value}>
+									{t.label}
+								</option>
+							))}
+						</select>
+						<ChevronDown size={14} className={styles.selectArrow} />
+					</div>
+				</div>
+
+				<div className={styles.mobileField}>
+					<label className={styles.label}>
+						<MapPin size={11} /> City
+					</label>
+					<div className={styles.selectWrap}>
+						<select
+							className={styles.select}
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
+						>
+							<option value="">All Cities</option>
+							{CITIES.map((c) => (
+								<option key={c} value={c}>
+									{c}
+								</option>
+							))}
+						</select>
+						<ChevronDown size={14} className={styles.selectArrow} />
+					</div>
+				</div>
+
+				<div className={styles.mobileField}>
+					<label className={styles.label}>
+						<Search size={11} /> Keyword
+					</label>
+					<input
+						type="text"
+						placeholder="Area, project, society…"
+						className={styles.input}
+						value={keyword}
+						onChange={(e) => setKeyword(e.target.value)}
+					/>
+				</div>
+
+				<button type="submit" className={`${styles.submitBtn} ${styles.submitBtnFull}`}>
+					<Search size={18} />
+					<span>Find Properties</span>
+				</button>
+			</div>
+		</form>
+	);
+}

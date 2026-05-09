@@ -1,0 +1,462 @@
+/* ========================================
+   PROPERTIES PAGE STYLES
+   ======================================== */
+
+/* Container */
+.pageContainer {
+    padding: 2rem 0 6rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .pageContainer {
+        padding: 3.5rem 0 9rem;
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 4rem;
+    }
+}
+
+/* ========================================
+   PAGE HEADER
+   ======================================== */
+.pageHeader {
+    background-color: var(--color-secondary, #1a1a2e);
+    padding: 2.25rem 0 3.5rem;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 768px) {
+    .pageHeader {
+        padding: 3rem 0 5rem;
+    }
+}
+
+.pageTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+    .pageTitle {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .pageTitle {
+        font-size: 2.5rem;
+    }
+}
+
+.pageSubtitle {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   TOOLBAR
+   ======================================== */
+.toolbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+    margin-top: -2rem;
+    position: relative;
+    z-index: 20;
+}
+
+@media (min-width: 1280px) {
+    .toolbar {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.toolbarLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    flex: 1;
+}
+
+@media (min-width: 640px) {
+    .toolbarLeft {
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}
+
+.toolbarRight {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(229, 231, 235, 0.4);
+}
+
+@media (min-width: 1280px) {
+    .toolbarRight {
+        padding-top: 0;
+        border-top: none;
+    }
+}
+
+/* ========================================
+   BUTTONS & TABS
+   ======================================== */
+.filterButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.75rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+    border-radius: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    background-color: white;
+    color: var(--color-secondary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.filterButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-primary);
+}
+
+.filterButtonActive {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 10px 20px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.filterBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+    box-shadow: 0 4px 8px rgba(var(--color-primary-rgb), 0.2);
+}
+
+.resetButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #dc2626;
+    background-color: #fef2f2;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(220, 38, 38, 0.1);
+}
+
+.resetButton:hover {
+    background-color: #fee2e2;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(220, 38, 38, 0.12);
+}
+
+.purposeTabs {
+    display: flex;
+    background-color: rgba(229, 231, 235, 0.4);
+    border-radius: 1rem;
+    padding: 0.375rem;
+    gap: 0.375rem;
+}
+
+.purposeTab {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgba(107, 114, 128, 1);
+}
+
+.purposeTabActive {
+    background-color: white;
+    color: var(--color-primary);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.divider {
+    height: 2.25rem;
+    width: 2px;
+    background-color: rgba(229, 231, 235, 0.6);
+    margin: 0 0.5rem;
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .divider {
+        display: block;
+    }
+}
+
+/* ========================================
+   ADVANCED FILTERS PANEL
+   ======================================== */
+.filtersPanel {
+    background-color: white;
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.02);
+    margin-bottom: 4rem;
+    border: 1px solid rgba(243, 244, 246, 1);
+    animation: panelReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.filtersPanelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(243, 244, 246, 1);
+}
+
+.filtersPanelTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: -0.02em;
+}
+
+.closeButton {
+    color: rgba(156, 163, 175, 1);
+    background: rgba(0, 0, 0, 0.04);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Filter Groups & Inputs */
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.filterLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(156, 163, 175, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-left: 0.25rem;
+}
+
+.filterInput,
+.filterSelect,
+.searchInput {
+    height: 3.25rem;
+    width: 100%;
+    padding: 0 1.125rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border: 1.5px solid rgba(229, 231, 235, 0.7);
+    border-radius: 0.875rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    color: var(--color-secondary);
+    transition: all 0.3s ease;
+}
+
+/* Sort Section */
+.sortSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sortLabel {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: rgba(156, 163, 175, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.sortSelect {
+    min-width: 12rem;
+    height: 3rem;
+    padding: 0 1rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+    border-radius: 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* View Toggle */
+.viewToggle {
+    display: flex;
+    background-color: white;
+    border: 1px solid rgba(229, 231, 235, 1);
+    border-radius: 1rem;
+    padding: 0.3125rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.viewButton {
+    padding: 0.625rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgba(156, 163, 175, 1);
+}
+
+.viewButtonActive {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 6px 15px rgba(var(--color-primary-rgb), 0.25);
+}
+
+/* Results grid animations */
+.resultsGrid, .resultsList {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(1rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   PAGINATION
+   ======================================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 3.5rem;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+}
+
+.paginationButton {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid rgba(229, 231, 235, 1);
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    background-color: white;
+    color: var(--color-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.paginationButton:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.pageNumber {
+    min-width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.875rem;
+    border: 2px solid rgba(229, 231, 235, 1);
+    border-radius: 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    background-color: white;
+    color: var(--color-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.pageNumber:hover {
+    border-color: var(--color-primary);
+    transform: scale(1.05) translateY(-1px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.pageNumberActive {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 10px 20px rgba(var(--color-primary-rgb), 0.25);
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+.emptyState {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 6rem 2rem;
+    background-color: white;
+    border-radius: 2.5rem;
+    border: 3px dashed rgba(229, 231, 235, 1);
+    animation: fadeIn 1s ease-out;
+}
+
+.emptyIcon {
+    margin: 0 auto 2.5rem;
+    opacity: 0.15;
+    color: var(--color-primary);
+    transform: scale(1.5);
+}
+
+.emptyTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+}

@@ -1,0 +1,399 @@
+/* ═══════════════════════════════════════════════════
+   LoginPage.module.css  —  BSK Real Estate
+   ═══════════════════════════════════════════════════ */
+
+:root {
+	--lp-brand: #c9923a;
+	--lp-brand-dark: #a97530;
+	--lp-brand-light: #fdfaf5;
+	--lp-accent: #f5a623;
+	--lp-text: #0f1523;
+	--lp-muted: #6b7280;
+	--lp-border: #e5e7eb;
+	--lp-bg: #f9fafb;
+	--lp-white: #ffffff;
+	--lp-radius: 14px;
+	--lp-ease: cubic-bezier(0.4, 0, 0.2, 1);
+	--lp-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Page shell ── */
+.page {
+	min-height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+/* ════════════════════════════════════════
+   LEFT PANEL — branding
+════════════════════════════════════════ */
+.panel {
+	position: relative;
+	background: linear-gradient(145deg, #0a1f10 0%, #1e2638 55%, #0c2918 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	padding: 60px 56px;
+}
+
+.panelContent {
+	position: relative;
+	z-index: 2;
+	max-width: 380px;
+}
+
+.panelLogo {
+	width: 64px;
+	height: 64px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	margin-bottom: 28px;
+	backdrop-filter: blur(8px);
+}
+
+.panelTitle {
+	font-size: 36px;
+	font-weight: 900;
+	color: #fff;
+	letter-spacing: -0.5px;
+	margin: 0 0 12px;
+	line-height: 1.1;
+}
+
+.panelSub {
+	font-size: 15px;
+	color: rgba(255, 255, 255, 0.6);
+	line-height: 1.7;
+	margin: 0 0 40px;
+}
+
+.panelList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.panelListItem {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.75);
+}
+
+.panelDot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--lp-accent);
+	flex-shrink: 0;
+}
+
+/* Decorative blurred circles */
+.circle1 {
+	position: absolute;
+	width: 360px;
+	height: 360px;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle,
+		rgba(201, 146, 58, 0.35) 0%,
+		transparent 70%
+	);
+	top: -80px;
+	right: -100px;
+	pointer-events: none;
+}
+
+.circle2 {
+	position: absolute;
+	width: 280px;
+	height: 280px;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle,
+		rgba(245, 166, 35, 0.1) 0%,
+		transparent 70%
+	);
+	bottom: -60px;
+	left: -60px;
+	pointer-events: none;
+}
+
+/* ════════════════════════════════════════
+   RIGHT PANEL — form
+════════════════════════════════════════ */
+.formSide {
+	background: var(--lp-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 32px;
+}
+
+.card {
+	width: 100%;
+	max-width: 420px;
+	background: var(--lp-white);
+	border-radius: 20px;
+	padding: 44px 40px;
+	box-shadow: var(--lp-shadow);
+}
+
+/* ── Card header ── */
+.cardHeader {
+	margin-bottom: 32px;
+}
+
+/* Mobile-only logo (hidden on desktop) */
+.mobileLogo {
+	display: none;
+	width: 48px;
+	height: 48px;
+	background: linear-gradient(135deg, var(--lp-brand), var(--lp-brand-dark));
+	border-radius: 12px;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	margin-bottom: 20px;
+}
+
+.cardTitle {
+	font-size: 26px;
+	font-weight: 800;
+	color: var(--lp-text);
+	margin: 0 0 8px;
+	letter-spacing: -0.3px;
+}
+
+.cardSub {
+	font-size: 14px;
+	color: var(--lp-muted);
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* ── Form ── */
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 7px;
+}
+
+.labelRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.label {
+	font-size: 13.5px;
+	font-weight: 600;
+	color: var(--lp-text);
+}
+
+.forgot {
+	font-size: 12.5px;
+	font-weight: 500;
+	color: var(--lp-brand);
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.forgot:hover {
+	color: var(--lp-brand-dark);
+	text-decoration: underline;
+}
+
+/* Inputs */
+.input {
+	width: 100%;
+	padding: 11px 14px;
+	border: 1.5px solid var(--lp-border);
+	border-radius: var(--lp-radius);
+	font-size: 14px;
+	color: var(--lp-text);
+	background: var(--lp-white);
+	transition:
+		border-color 0.2s var(--lp-ease),
+		box-shadow 0.2s var(--lp-ease);
+	outline: none;
+	box-sizing: border-box;
+}
+
+.input::placeholder {
+	color: #c4cac9;
+}
+
+.input:focus {
+	border-color: var(--lp-brand);
+	box-shadow: 0 0 0 3px rgba(201, 146, 58, 0.1);
+}
+
+.input:hover:not(:focus) {
+	border-color: #d1d5db;
+}
+
+/* Password field */
+.passwordWrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.inputPad {
+	padding-right: 44px;
+}
+
+.eyeBtn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	padding: 4px;
+	color: var(--lp-muted);
+	cursor: pointer;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	transition:
+		color 0.2s,
+		background 0.2s;
+}
+
+.eyeBtn:hover {
+	color: var(--lp-text);
+	background: var(--lp-bg);
+}
+
+/* Submit button */
+.submitBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	padding: 13px;
+	margin-top: 4px;
+	background: var(--lp-brand);
+	color: #fff;
+	border: none;
+	border-radius: var(--lp-radius);
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	transition:
+		background 0.2s var(--lp-ease),
+		transform 0.15s var(--lp-ease),
+		box-shadow 0.2s var(--lp-ease);
+	box-shadow: 0 4px 14px rgba(201, 146, 58, 0.35);
+}
+
+.submitBtn:hover:not(:disabled) {
+	background: var(--lp-brand-dark);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(201, 146, 58, 0.45);
+}
+
+.submitBtn:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.submitBtn:disabled {
+	opacity: 0.65;
+	cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: spin 0.7s linear infinite;
+	flex-shrink: 0;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Footer */
+.footerText {
+	text-align: center;
+	margin-top: 24px;
+	font-size: 13.5px;
+	color: var(--lp-muted);
+}
+
+.footerLink {
+	color: var(--lp-brand);
+	font-weight: 600;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.footerLink:hover {
+	color: var(--lp-brand-dark);
+	text-decoration: underline;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 860px) {
+	.page {
+		grid-template-columns: 1fr;
+	}
+
+	.panel {
+		display: none;
+	}
+
+	.formSide {
+		padding: 32px 20px;
+		min-height: 100vh;
+		align-items: flex-start;
+		padding-top: 60px;
+	}
+
+	.card {
+		padding: 36px 28px;
+		box-shadow: none;
+		border: 1px solid var(--lp-border);
+	}
+
+	.mobileLogo {
+		display: flex;
+	}
+}
+
+@media (max-width: 400px) {
+	.card {
+		padding: 28px 20px;
+	}
+
+	.cardTitle {
+		font-size: 22px;
+	}
+}

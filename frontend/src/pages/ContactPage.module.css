@@ -1,0 +1,298 @@
+/* ========================================
+   CONTACT PAGE STYLES
+   ======================================== */
+
+.pageContainer {
+    padding: 0 0 6rem;
+    background-color: white;
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 4rem;
+    }
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+.hero {
+    background-color: var(--color-secondary, #1a1a2e);
+    padding: 3rem 0 4rem;
+    color: white;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        padding: 4rem 0 6rem;
+    }
+}
+
+.heroTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+    .heroTitle {
+        font-size: 2.75rem;
+    }
+}
+
+.heroSubtitle {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ========================================
+   CONTACT GRID
+   ======================================== */
+.contactGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 1024px) {
+    .contactGrid {
+        grid-template-columns: 1.2fr 1fr;
+    }
+}
+
+/* ========================================
+   DIRECTORY SECTION (OFFICE WORKERS)
+   ======================================== */
+.directorySection {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+.directoryTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.directoryTitle span {
+    width: 2rem;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+.workerList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.workerCard {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.workerCard:hover {
+    background-color: white;
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transform: translateX(5px);
+}
+
+.workerIcon {
+    width: 3rem;
+    height: 3rem;
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workerInfo {
+    flex: 1;
+}
+
+.workerName {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.workerRole {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.workerEmail {
+    font-size: 0.875rem;
+    color: rgba(107, 114, 128, 1);
+    text-decoration: none;
+    display: block;
+    margin-top: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.workerEmail:hover {
+    color: var(--color-primary);
+}
+
+/* ========================================
+   FORM SECTION
+   ======================================== */
+.formSection {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(229, 231, 235, 0.3);
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .formGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(156, 163, 175, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.9375rem;
+    border: 1px solid rgba(229, 231, 235, 0.8);
+    border-radius: 0.875rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.textarea {
+    height: 8rem;
+    resize: none;
+}
+
+.input:focus, .textarea:focus {
+    border-color: var(--color-primary);
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(var(--color-primary-rgb), 0.08);
+}
+
+.submitButton {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 12px 24px rgba(var(--color-primary-rgb), 0.3);
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(var(--color-primary-rgb), 0.4);
+}
+
+/* ========================================
+   OFFICE CARDS (BOTTOM)
+   ======================================== */
+.officeGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 5rem;
+}
+
+@media (min-width: 768px) {
+    .officeGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.infoCard {
+    text-align: center;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    background-color: rgba(249, 250, 251, 0.5);
+}
+
+.infoIcon {
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.infoTitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.infoText {
+    font-size: 0.9375rem;
+    color: rgba(107, 114, 128, 1);
+    line-height: 1.6;
+}

@@ -1,0 +1,928 @@
+/* ================================================================
+   agents.module.css
+   Aesthetic: Dark editorial — deep slate canvas, warm amber accents
+   Fonts: Cormorant Garamond (display) + Syne (body/labels)
+   Shared between AgentsPage and AgentProfilePage
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Syne:wght@400;600;700;800&display=swap');
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+    --ag-amber: #d4a853;
+    --ag-amber-light: #f0d08a;
+    --ag-amber-dim: rgba(212, 168, 83, 0.15);
+    --ag-ink: #0c1220;
+    --ag-ink-2: #1a2336;
+    --ag-ink-soft: #5a6478;
+    --ag-muted: #8a94a6;
+    --ag-surface: #f4f3ef;
+    --ag-white: #ffffff;
+    --ag-green: var(--primary);
+    --ag-wa: #25d366;
+    --ag-wa-dark: #1dab55;
+    --ag-border: rgba(255, 255, 255, 0.08);
+    --ag-card-bg: #141c2e;
+
+    --ag-r-sm: 0.75rem;
+    --ag-r-md: 1.25rem;
+    --ag-r-lg: 2rem;
+    --ag-r-xl: 2.5rem;
+
+    --ag-shadow-card: 0 8px 32px rgba(12, 18, 32, 0.35);
+    --ag-shadow-hover: 0 20px 60px rgba(12, 18, 32, 0.55);
+    --ag-shadow-amber: 0 8px 28px rgba(212, 168, 83, 0.25);
+
+    --ag-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ag-dur: 0.35s;
+
+    font-family: 'Syne', sans-serif;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+.page::-webkit-scrollbar {
+    width: 6px;
+}
+
+.page::-webkit-scrollbar-track {
+    background: var(--ag-ink);
+}
+
+.page::-webkit-scrollbar-thumb {
+    background: var(--ag-ink-2);
+    border-radius: 99px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED — Loading Spinner
+   ═══════════════════════════════════════════════════════════════ */
+.spinnerWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--ag-amber-dim);
+    border-top-color: var(--ag-amber);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AGENTS LIST PAGE
+   ═══════════════════════════════════════════════════════════════ */
+
+.listPage {
+    background: var(--ag-ink);
+    min-height: 100vh;
+    color: var(--ag-white);
+}
+
+/* ── Hero ── */
+.listHero {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 1.5rem 6rem;
+    text-align: center;
+}
+
+.listHeroBg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 60% at 50% -10%, rgba(212, 168, 83, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+}
+
+.listHeroGrid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 56px 56px;
+}
+
+.listHeroInner {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.listHeroBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: var(--ag-amber-dim);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    border-radius: 99px;
+    color: var(--ag-amber-light);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s var(--ag-ease) both;
+}
+
+.badgeDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ag-amber);
+    animation: badgePing 2s ease-in-out infinite;
+}
+
+@keyframes badgePing {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.8);
+    }
+}
+
+.listHeroTitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--ag-white);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.8s 0.08s var(--ag-ease) both;
+}
+
+.listHeroAccent {
+    color: var(--ag-amber);
+    font-style: italic;
+}
+
+.listHeroSub {
+    color: var(--ag-muted);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    animation: fadeUp 0.9s 0.16s var(--ag-ease) both;
+}
+
+.listHeroStats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: fadeUp 1s 0.24s var(--ag-ease) both;
+}
+
+.statItem {
+    text-align: center;
+}
+
+.statNum {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ag-amber);
+    display: block;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ag-muted);
+    margin-top: 0.3rem;
+    display: block;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Grid Container ── */
+.listContainer {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+}
+
+.sectionHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.sectionHeadTitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ag-white);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.sectionHeadTitle svg {
+    color: var(--ag-amber);
+}
+
+.sectionCount {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ag-muted);
+}
+
+/* ── Agent Card ── */
+.agentsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.25rem;
+}
+
+@media (min-width: 480px) {
+    .agentsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .agentsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1100px) {
+    .agentsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.agentCard {
+    background: var(--ag-card-bg);
+    border: 1px solid var(--ag-border);
+    border-radius: var(--ag-r-xl);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--ag-dur) var(--ag-ease),
+        box-shadow var(--ag-dur) var(--ag-ease),
+        border-color var(--ag-dur) var(--ag-ease);
+    box-shadow: var(--ag-shadow-card);
+    animation: fadeUp 0.6s var(--ag-ease) both;
+}
+
+.agentCard:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--ag-shadow-hover);
+    border-color: rgba(212, 168, 83, 0.25);
+}
+
+/* Staggered animation */
+.agentCard:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.agentCard:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.agentCard:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.agentCard:nth-child(4) {
+    animation-delay: 0.20s;
+}
+
+.agentCard:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.agentCard:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+.cardTop {
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.cardTopGlow {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: opacity var(--ag-dur);
+    opacity: 0;
+}
+
+.agentCard:hover .cardTopGlow {
+    opacity: 1;
+}
+
+.avatarWrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.avatarRing {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--ag-amber);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity var(--ag-dur) var(--ag-ease), transform var(--ag-dur) var(--ag-ease);
+}
+
+.agentCard:hover .avatarRing {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid rgba(212, 168, 83, 0.2);
+}
+
+.avatarInitial {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ag-amber) 0%, #a87030 100%);
+    color: var(--ag-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.agentOnline {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 14px;
+    height: 14px;
+    background: var(--ag-green);
+    border-radius: 50%;
+    border: 2px solid var(--ag-card-bg);
+}
+
+.cardName {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ag-white);
+    margin: 0 0 0.25rem;
+}
+
+.cardRole {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ag-amber);
+    margin-bottom: 0.75rem;
+}
+
+.cardCity {
+    font-size: 0.75rem;
+    color: var(--ag-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.cardMid {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--ag-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cardContact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--ag-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardContact svg {
+    color: var(--ag-amber);
+    flex-shrink: 0;
+}
+
+.cardListings {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--ag-border);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ag-muted);
+}
+
+.cardListings svg {
+    color: var(--ag-amber);
+}
+
+.cardListingsNum {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ag-white);
+    margin-left: auto;
+}
+
+.cardFooter {
+    padding: 1rem 1.5rem;
+    background: rgba(212, 168, 83, 0.05);
+    border-top: 1px solid var(--ag-border);
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ag-amber);
+    transition: background var(--ag-dur), color var(--ag-dur);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.agentCard:hover .cardFooter {
+    background: var(--ag-amber);
+    color: var(--ag-ink);
+}
+
+.cardFooterArrow {
+    transition: transform var(--ag-dur) var(--ag-ease);
+}
+
+.agentCard:hover .cardFooterArrow {
+    transform: translateX(4px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AGENT PROFILE PAGE
+   ═══════════════════════════════════════════════════════════════ */
+
+.profilePage {
+    background: var(--ag-ink);
+    min-height: 100vh;
+    color: var(--ag-white);
+}
+
+/* ── Profile Hero ── */
+.profileHero {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 1.5rem 7rem;
+}
+
+.profileHeroBg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(212, 168, 83, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 80% 20%, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+}
+
+.profileHeroGrid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 56px 56px;
+}
+
+.profileHeroInner {
+    position: relative;
+    max-width: 68rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    animation: fadeUp 0.7s var(--ag-ease) both;
+}
+
+@media (min-width: 768px) {
+    .profileHeroInner {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+}
+
+.profileAvatarWrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profileAvatarRing {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(212, 168, 83, 0.4);
+}
+
+.profileAvatarRing2 {
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 168, 83, 0.15);
+}
+
+.profileAvatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--ag-amber);
+}
+
+.profileAvatarInitial {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ag-amber) 0%, #a87030 100%);
+    color: var(--ag-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    border: 3px solid var(--ag-amber);
+}
+
+.profileOnline {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    background: var(--ag-green);
+    border-radius: 50%;
+    border: 3px solid var(--ag-ink);
+}
+
+.profileInfo {
+    flex: 1;
+}
+
+.profileBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--ag-amber-dim);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    border-radius: 99px;
+    color: var(--ag-amber-light);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+
+.profileName {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--ag-white);
+    line-height: 1.1;
+    margin: 0 0 0.4rem;
+}
+
+.profileRole {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ag-amber);
+    margin-bottom: 0.75rem;
+}
+
+.profileMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: var(--ag-muted);
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .profileMeta {
+        justify-content: flex-start;
+    }
+}
+
+.profileMetaItem {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.profileMetaItem svg {
+    color: var(--ag-amber);
+}
+
+/* ── Divider Line ── */
+.heroDivider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ag-amber) 30%, var(--ag-amber) 70%, transparent);
+    opacity: 0.2;
+    max-width: 68rem;
+    margin: 0 auto;
+}
+
+/* ── Profile Body ── */
+.profileContainer {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+    margin-top: -3.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.profileLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (min-width: 900px) {
+    .profileLayout {
+        grid-template-columns: 280px 1fr;
+    }
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.sideCard {
+    background: var(--ag-card-bg);
+    border: 1px solid var(--ag-border);
+    border-radius: var(--ag-r-xl);
+    overflow: hidden;
+    box-shadow: var(--ag-shadow-card);
+}
+
+.sideCardHead {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--ag-border);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ag-amber);
+}
+
+.sideCardBody {
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.contactBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--ag-r-md);
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--ag-dur), box-shadow var(--ag-dur), filter var(--ag-dur);
+}
+
+.contactBtn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.contactBtn:active {
+    transform: scale(0.97);
+}
+
+.btnPhone {
+    background: var(--ag-amber);
+    color: var(--ag-ink);
+    box-shadow: var(--ag-shadow-amber);
+}
+
+.btnWA {
+    background: var(--ag-wa);
+    color: var(--ag-white);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+}
+
+.btnEmail {
+    background: transparent;
+    border: 1.5px solid var(--ag-border) !important;
+    color: var(--ag-muted);
+    border-radius: var(--ag-r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color var(--ag-dur), color var(--ag-dur);
+}
+
+.btnEmail:hover {
+    border-color: var(--ag-amber) !important;
+    color: var(--ag-amber);
+}
+
+.sideStatRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.sideStat {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ag-border);
+    border-radius: var(--ag-r-md);
+    padding: 1rem;
+    text-align: center;
+}
+
+.sideStatNum {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ag-amber);
+    display: block;
+    line-height: 1;
+}
+
+.sideStatLabel {
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ag-muted);
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.memberSince {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--ag-muted);
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--ag-border);
+}
+
+.memberSince svg {
+    color: var(--ag-amber);
+}
+
+/* ── Main (listings) ── */
+
+.listingsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.listingsTitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ag-white);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.listingsTitle svg {
+    color: var(--ag-amber);
+}
+
+.listingsBadge {
+    padding: 0.35rem 0.85rem;
+    background: var(--ag-amber-dim);
+    border: 1px solid rgba(212, 168, 83, 0.2);
+    border-radius: 99px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--ag-amber);
+    letter-spacing: 0.1em;
+}
+
+.propertiesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+    .propertiesGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.emptyState {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--ag-card-bg);
+    border: 1px solid var(--ag-border);
+    border-radius: var(--ag-r-xl);
+}
+
+.emptyIcon {
+    color: var(--ag-amber);
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
+.emptyText {
+    font-size: 0.875rem;
+    color: var(--ag-muted);
+}

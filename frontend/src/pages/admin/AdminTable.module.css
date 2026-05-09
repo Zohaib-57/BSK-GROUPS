@@ -1,0 +1,181 @@
+/* ========================================
+   ADMIN SHARED TABLE STYLES
+   ======================================== */
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    color: rgba(107, 114, 128, 1);
+    margin-top: 0.5rem;
+}
+
+/* ========================================
+   TABLE CONTAINER
+   ======================================== */
+.tableSection {
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    overflow: hidden;
+}
+
+.tableToolbar {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(243, 244, 246, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.searchBox {
+    position: relative;
+    max-width: 24rem;
+    flex: 1;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(156, 163, 175, 1);
+}
+
+.searchInput {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 1rem 0 2.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+    font-size: 0.875rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+/* ========================================
+   THE TABLE
+   ======================================== */
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: rgba(249, 250, 251, 0.5);
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(156, 163, 175, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(243, 244, 246, 1);
+}
+
+.table td {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+    border-bottom: 1px solid rgba(243, 244, 246, 1);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover td {
+    background-color: rgba(249, 250, 251, 0.5);
+}
+
+/* ========================================
+   BADGES & UTILS
+   ======================================== */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badgeAdmin { background-color: #eef2ff; color: #3730a3; }
+.badgeAgent { background-color: #fdfaf5; color: #c9923a; }
+.badgeUser { background-color: #f8fafc; color: #475569; }
+
+.actionBtn {
+    padding: 0.5rem;
+    border-radius: 0.625rem;
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(156, 163, 175, 1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionBtn:hover {
+    background-color: white;
+    color: var(--color-primary);
+    border-color: rgba(var(--color-primary-rgb), 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.deleteBtn:hover {
+    color: #ef4444;
+    background-color: #fff1f2;
+    border-color: rgba(239, 68, 68, 0.1);
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.1);
+}
+
+/* User Info Cell */
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: rgba(243, 244, 246, 1);
+}
+
+.name {
+    font-weight: 700;
+    display: block;
+}
+
+.email {
+    font-size: 0.75rem;
+    color: rgba(156, 163, 175, 1);
+}
