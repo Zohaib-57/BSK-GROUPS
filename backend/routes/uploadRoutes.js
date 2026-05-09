@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router();
-import { upload, cloudinary } from "../config/cloudinary.js";
+import { upload, cloudinary, uploadToCloudinary } from "../config/cloudinary.js";
 import { protect } from "../middleware/auth.js";
 import asyncHandler from "express-async-handler";
 
@@ -15,9 +15,13 @@ router.post(
 				.status(400)
 				.json({ success: false, message: "No files uploaded" });
 		}
-		const images = req.files.map((file) => ({
-			url: file.path,
-			publicId: file.filename,
+		const uploadPromises = req.files.map((file) =>
+			uploadToCloudinary(file.buffer)
+		);
+		const results = await Promise.all(uploadPromises);
+		const images = results.map((result) => ({
+			url: result.secure_url,
+			publicId: result.public_id,
 		}));
 		res.json({ success: true, images });
 	}),
