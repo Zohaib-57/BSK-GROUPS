@@ -8,8 +8,9 @@ const __dirname = path.dirname(__filename);
 const result = config({ path: path.resolve(__dirname, ".env") });
 
 if (result.error) {
-	console.error("❌ Failed to load .env file:", result.error);
+  // On Railway/production, env vars are injected by the platform — this is normal
+  console.warn("⚠️ No .env file found — using platform environment variables.");
 } else {
-	console.log("✅ .env file loaded successfully");
-	console.log("Loaded keys:", Object.keys(result.parsed || {}));
+  console.log("✅ .env file loaded successfully");
+  console.log("Loaded keys:", Object.keys(result.parsed || {}));
 }
