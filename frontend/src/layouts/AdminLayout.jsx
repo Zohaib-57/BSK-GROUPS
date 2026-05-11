@@ -41,8 +41,19 @@ export default function AdminLayout() {
 
 	return (
 		<div className={styles.layoutWrapper}>
+			{mobileOpen && (
+				<button
+					type="button"
+					className={styles.mobileBackdrop}
+					onClick={() => setMobileOpen(false)}
+					aria-label="Close menu"
+				/>
+			)}
+
 			{/* Sidebar */}
-			<aside className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : styles.sidebarFull}`}>
+			<aside
+				className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : styles.sidebarFull} ${mobileOpen ? styles.sidebarMobileOpen : ""}`}
+			>
 				<div className={styles.sidebarHeader}>
 					{!collapsed && (
 						<div className={styles.logoText}>
@@ -82,7 +93,18 @@ export default function AdminLayout() {
 				{/* Topbar */}
 				<header className={styles.topbar}>
 					<div className={styles.topbarLeft}>
-						<button className={styles.collapseBtn} onClick={() => setCollapsed(!collapsed)}>
+						<button
+							className={`${styles.collapseBtn} ${styles.mobileMenuBtn}`}
+							onClick={() => setMobileOpen((v) => !v)}
+							aria-label="Toggle mobile menu"
+						>
+							<Menu size={20} />
+						</button>
+						<button
+							className={`${styles.collapseBtn} ${styles.desktopCollapseBtn}`}
+							onClick={() => setCollapsed(!collapsed)}
+							aria-label="Collapse sidebar"
+						>
 							<Menu size={20} />
 						</button>
 						<div className={styles.globalSearch}>

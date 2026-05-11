@@ -30,8 +30,8 @@ export default function AdminInquiries() {
 					<h1 className={styles.title}>Lead Management</h1>
 					<p className={styles.subtitle}>Track and respond to all property inquiries and contact requests.</p>
 				</div>
-				<div className="flex gap-2">
-					<button className="flex items-center gap-2 bg-white border border-gray-200 px-4 py-2.5 rounded-xl font-bold text-xs text-gray-500 hover:border-primary hover:text-primary transition-all">
+				<div className="w-full sm:w-auto flex gap-2">
+					<button className="w-full sm:w-auto justify-center flex items-center gap-2 bg-white border border-gray-200 px-4 py-2.5 rounded-xl font-bold text-xs text-gray-500 hover:border-primary hover:text-primary transition-all">
 						<Filter size={16} /> Filter Leads
 					</button>
 				</div>
@@ -49,7 +49,7 @@ export default function AdminInquiries() {
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
 					</div>
-					<div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+					<div className="w-full sm:w-auto text-xs font-bold text-gray-400 uppercase tracking-widest sm:text-right">
 						{data?.inquiries?.length || 0} Total Leads
 					</div>
 				</div>

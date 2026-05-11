@@ -33,7 +33,7 @@ export default function AdminBlogs() {
 					<h1 className={styles.title}>Editorial Management</h1>
 					<p className={styles.subtitle}>Create, edit, and manage your market insights and news articles.</p>
 				</div>
-				<button className="flex items-center gap-2 bg-secondary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:bg-gray-800 transition-all">
+				<button className="w-full sm:w-auto justify-center flex items-center gap-2 bg-secondary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:bg-gray-800 transition-all">
 					<Plus size={18} /> New Article
 				</button>
 			</div>
@@ -50,7 +50,7 @@ export default function AdminBlogs() {
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
 					</div>
-					<div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+					<div className="w-full sm:w-auto text-xs font-bold text-gray-400 uppercase tracking-widest sm:text-right">
 						{data?.blogs?.length || 0} Total Articles
 					</div>
 				</div>

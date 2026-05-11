@@ -54,22 +54,22 @@ export default function PropertyCard({ property, horizontal = false }) {
 		<Link
 			to={`/properties/${property.slug}`}
 			className={`
-        group bg-white rounded-xl overflow-hidden border border-gray-100 hover:border-primary/20 hover:shadow-lg 
-        transition-all duration-300 no-underline text-inherit flex flex-col
-        ${horizontal ? "sm:flex-row" : ""}
+        group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_10px_24px_rgba(15,23,42,0.16)] hover:border-primary/20 hover:shadow-[0_16px_38px_rgba(15,23,42,0.24)] 
+        transition-all duration-300 no-underline text-inherit flex flex-col h-full
+        ${horizontal ? "sm:flex-row sm:min-h-[230px]" : "min-h-[380px]"}
       `}
 		>
 			{/* Image Section */}
 			<div
-				className={`relative overflow-hidden ${horizontal ? "sm:w-64 sm:shrink-0" : ""}`}
+				className={`relative overflow-hidden ${horizontal ? "sm:w-64 sm:shrink-0" : "aspect-[4/3]"}`}
 			>
 				<img
 					src={mainImage}
 					alt={property.title}
 					className={`
-            w-full h-48 object-cover transition-transform duration-700 
+            w-full h-full object-cover transition-transform duration-700 
             group-hover:scale-110
-            ${horizontal ? "sm:h-full" : ""}
+            ${horizontal ? "h-48 sm:h-full" : ""}
           `}
 					loading="lazy"
 				/>
@@ -104,10 +104,10 @@ export default function PropertyCard({ property, horizontal = false }) {
 			</div>
 
 			{/* Content Section */}
-			<div className="p-3.5 flex-1 flex flex-col gap-1">
+			<div className="px-4 py-4 sm:px-5 sm:py-5 flex-1 flex flex-col gap-2.5 min-h-0">
 				{/* Price Row */}
 				<div className="flex items-baseline gap-1">
-					<span className="text-lg font-bold text-primary">
+					<span className="text-base sm:text-lg font-bold text-primary">
 						PKR {formatPrice(property.price)}
 					</span>
 					{property.priceType !== "fixed" && (
@@ -118,20 +118,20 @@ export default function PropertyCard({ property, horizontal = false }) {
 				</div>
 
 				{/* Title */}
-				<h3 className="text-[13px] font-bold text-gray-800 leading-snug line-clamp-2 min-h-[2.5em] group-hover:text-primary transition-colors">
+				<h3 className="text-[13px] sm:text-sm font-bold text-gray-800 leading-snug line-clamp-2 min-h-[2.6em] group-hover:text-primary transition-colors">
 					{property.title}
 				</h3>
 
 				{/* Location */}
-				<div className="flex items-center gap-1 text-[11px] text-gray-500 mt-0.5">
+				<div className="flex items-center gap-1 text-[11px] text-gray-500">
 					<MapPin size={11} className="text-primary/70" />
 					<span className="truncate font-medium">
-						{property.location.area || property.location.society}, {property.location.city}
+						{property.location?.area || property.location?.society || property.location?.address || "Location"}, {property.location?.city || "Peshawar"}
 					</span>
 				</div>
 
 				{/* Specs */}
-				<div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-50">
+				<div className="flex items-center justify-between pt-3 border-t border-gray-50 mt-auto">
 					<div className="flex gap-3">
 						{property.bedrooms > 0 && (
 							<div className="flex items-center gap-1 text-[11px] text-gray-600 font-semibold">
@@ -148,10 +148,10 @@ export default function PropertyCard({ property, horizontal = false }) {
 						<Square size={10} className="text-gray-400" /> {property.area.value} {property.area.unit}
 					</div>
 				</div>
-			</div>
+
 				{/* Agent Info */}
 				{property.postedBy && (
-					<div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-gray-100">
+					<div className="flex items-center gap-1.5 pt-2 border-t border-gray-100 min-h-8">
 						{property.postedBy.avatar ? (
 							<img
 								src={property.postedBy.avatar}
@@ -168,6 +168,7 @@ export default function PropertyCard({ property, horizontal = false }) {
 						</span>
 					</div>
 				)}
+			</div>
 
 			{/* Add line-clamp utility for text truncation */}
 			<style>{`

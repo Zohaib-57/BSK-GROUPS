@@ -82,7 +82,7 @@ export default function AdminProperties() {
 					<h1 className={styles.title}>Property Inventory</h1>
 					<p className={styles.subtitle}>Manage and review all property listings across the platform.</p>
 				</div>
-				<Link to="/post-property" className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all">
+				<Link to="/post-property" className="w-full sm:w-auto justify-center flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all">
 					<Plus size={18} /> List New Property
 				</Link>
 			</div>
@@ -99,7 +99,7 @@ export default function AdminProperties() {
 							onChange={(e) => setSearchTerm(e.target.value)}
 						/>
 					</div>
-					<div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+					<div className="w-full sm:w-auto text-xs font-bold text-gray-400 uppercase tracking-widest sm:text-right">
 						{data?.totalCount || 0} Total Listings
 					</div>
 				</div>
