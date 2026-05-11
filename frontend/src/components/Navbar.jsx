@@ -15,6 +15,7 @@ import {
 	Home,
 	Users,
 	BookOpen,
+	Table,
 } from "lucide-react";
 import styles from "./Navbar.module.css";
 
@@ -34,6 +35,11 @@ const NAV_LINKS = [
 	{ label: "Home", path: "/", icon: <Home size={15} />, end: true },
 	{ label: "Agents", path: "/agents", icon: <Users size={15} /> },
 	{ label: "Blog", path: "/blogs", icon: <BookOpen size={15} /> },
+	{
+		label: "Live inventory",
+		path: "/live-inventory",
+		icon: <Table size={15} />,
+	},
 	{ label: "About", path: "/about", icon: <Building2 size={15} /> },
 	{ label: "Contact", path: "/contact", icon: <Users size={15} /> },
 ];

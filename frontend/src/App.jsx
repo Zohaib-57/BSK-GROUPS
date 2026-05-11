@@ -26,6 +26,7 @@ import AgentProfilePage from "./pages/AgentProfilePage";
 import BlogsPage from "./pages/BlogsPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import AboutPage from "./pages/AboutPage";
+import LiveInventoryPage from "./pages/LiveInventoryPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -77,6 +78,7 @@ const AppRoutes = () => (
 			<Route path="/blogs" element={<BlogsPage />} />
 			<Route path="/blogs/:slug" element={<BlogDetailPage />} />
 			<Route path="/about" element={<AboutPage />} />
+			<Route path="/live-inventory" element={<LiveInventoryPage />} />
 			<Route path="/contact" element={<ContactPage />} />
 			<Route path="/verify-email/:token" element={<VerifyEmailPage />} />
 			<Route path="/reset-password/:token" element={<ResetPasswordPage />} />
