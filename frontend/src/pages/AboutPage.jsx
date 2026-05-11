@@ -4,25 +4,30 @@ import styles from "./AboutPage.module.css";
 
 const TEAM_MEMBERS = [
 	{
-		name: "Arsalan Khan",
-		role: "Founder & CEO",
-		image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+		name: "Nizam Ullah",
+		role: "CEO",
+		contact: "03062499868",
+		image: "/team/office-background-designify.png",
 	},
 	{
-		name: "Zainab Ahmed",
-		role: "Head of Operations",
-		image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+		name: "Israr Khalil",
+		role: "Chairman",
+		subRole: "DHA Association JS",
+		contact: "0334-5067700",
+		image: "/team/WhatsApp-Image-2025-01-01-at-10.35.33-PM-scaled-e1736684895185.jpeg",
 	},
 	{
-		name: "Bilal Sheikh",
-		role: "Principal Architect",
-		image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+		name: "Adnan Khan",
+		role: "Managing Director",
+		contact: "0316-9111389",
+		image: "/team/WhatsApp-Image-2025-01-01-at-10.32.37-PM.jpeg",
 	},
 	{
-		name: "Maria Gul",
-		role: "Senior Consultant",
-		image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-	}
+		name: "M. Irfan",
+		role: "Media Director",
+		contact: "0333-8394282",
+		image: "/team/WhatsApp-Image-2024-11-22-at-6.23.09-AM.png",
+	},
 ];
 
 const CORE_VALUES = [
@@ -166,7 +171,14 @@ export default function AboutPage() {
 										<img loading="lazy" src={member.image} alt={member.name} className={styles.teamImage} />
 									</div>
 									<h3 className={styles.teamName}>{member.name}</h3>
-									<span className={member.role}>{member.role}</span>
+									<span className={styles.teamRole}>{member.role}</span>
+									{member.subRole && (
+										<span className={styles.teamSubRole}>{member.subRole}</span>
+									)}
+									<div className={styles.teamContact}>
+										<Phone size={14} />
+										<span>{member.contact}</span>
+									</div>
 								</div>
 							))}
 						</div>

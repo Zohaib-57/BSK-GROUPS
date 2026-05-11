@@ -52,7 +52,7 @@ export default function PropertiesPage() {
 	const [filters, setFilters] = useState({
 		purpose: searchParams.get("purpose") || "",
 		type: searchParams.get("type") || "",
-		city: searchParams.get("city") || "Peshawar",
+		city: searchParams.get("city") || "",
 		area: searchParams.get("area") || "",
 		society: searchParams.get("society") || "",
 		keyword: searchParams.get("keyword") || "",
@@ -76,6 +76,9 @@ export default function PropertiesPage() {
 		queryKey: ["properties", queryParams],
 		queryFn: () => propertyAPI.getAll(queryParams).then((r) => r.data),
 		keepPreviousData: true,
+		staleTime: 0,
+		refetchOnMount: "always",
+		refetchOnWindowFocus: true,
 	});
 
 	const updateFilter = (key, value) => {
@@ -86,7 +89,7 @@ export default function PropertiesPage() {
 		setFilters({
 			purpose: "",
 			type: "",
-			city: "Peshawar",
+			city: "",
 			keyword: "",
 			minPrice: "",
 			maxPrice: "",

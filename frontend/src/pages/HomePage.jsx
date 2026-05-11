@@ -21,28 +21,28 @@ const CATEGORIES = [
 		label: "Homes",
 		icon: Home,
 		path: "/properties?type=house",
-		count: "5+ Listings",
+		count: "View listings",
 		desc: "Find 100% verified residential properties",
 	},
 	{
 		label: "Plots",
 		icon: TreePine,
 		path: "/properties?type=plot",
-		count: "3+ Listings",
+		count: "View listings",
 		desc: "Best residential, commercial & industrial plots",
 	},
 	{
 		label: "Commercial",
 		icon: Store,
 		path: "/properties?type=commercial",
-		count: "3+ Listings",
+		count: "View listings",
 		desc: "Explore high-potential commercial properties",
 	},
 	{
 		label: "Apartments",
 		icon: Building2,
 		path: "/properties?type=apartment",
-		count: "2+ Listings",
+		count: "View listings",
 		desc: "Modern apartments in prime locations",
 	},
 ];
@@ -53,7 +53,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-		properties: 120,
 		from: "from-amber-800",
 		to: "to-secondary",
 	},
@@ -62,7 +61,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c",
-		properties: 95,
 		from: "from-slate-700",
 		to: "to-slate-950",
 	},
@@ -71,7 +69,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1599423300746-b62533397364",
-		properties: 80,
 		from: "from-primary-dark",
 		to: "to-secondary",
 	},
@@ -80,7 +77,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
-		properties: 60,
 		from: "from-primary",
 		to: "to-secondary",
 	},
@@ -89,7 +85,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d",
-		properties: 70,
 		from: "from-primary-dark",
 		to: "to-secondary",
 	},
@@ -98,7 +93,6 @@ const SOCIETIES = [
 		city: "Peshawar",
 		province: "KPK",
 		image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde",
-		properties: 50,
 		from: "from-primary-dark",
 		to: "to-secondary",
 	},
@@ -132,16 +126,22 @@ const WHY_BSK = [
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-	const { data: featuredData } = useQuery({
-		queryKey: ["featured-properties"],
-		queryFn: () => propertyAPI.getFeatured().then((r) => r.data),
+	const { data: latestData } = useQuery({
+		queryKey: ["latest-properties"],
+		queryFn: () =>
+			propertyAPI
+				.getAll({ sort: "newest", limit: 8, page: 1 })
+				.then((r) => r.data),
+		staleTime: 0,
+		refetchOnMount: "always",
+		refetchOnWindowFocus: true,
 	});
 	const { data: blogsData } = useQuery({
 		queryKey: ["featured-blogs"],
 		queryFn: () => blogAPI.getFeatured().then((r) => r.data),
 	});
 
-	const properties = featuredData?.properties ?? [];
+	const properties = latestData?.properties ?? [];
 	const blogs = blogsData?.blogs ?? [];
 
 	return (
@@ -220,10 +220,10 @@ export default function HomePage() {
 				<div className="hp-container">
 					<div className="hp-section__header hp-section__header--between">
 						<div>
-							<p className="hp-eyebrow hp-eyebrow--dark">Handpicked for You</p>
-							<h2 className="hp-section__title">Featured Properties</h2>
+							<p className="hp-eyebrow hp-eyebrow--dark">Freshly Added</p>
+							<h2 className="hp-section__title">Latest Properties</h2>
 						</div>
-						<Link to="/properties?isFeatured=true" className="hp-view-all">
+						<Link to="/properties" className="hp-view-all">
 							View All <ArrowRight size={16} />
 						</Link>
 					</div>
@@ -235,7 +235,7 @@ export default function HomePage() {
 							))
 						) : (
 							<p className="text-center text-gray-500 py-10 col-span-full">
-								No featured properties available at the moment.
+								No properties available at the moment.
 							</p>
 						)}
 					</div>
@@ -279,7 +279,7 @@ export default function HomePage() {
 									<span>
 										{s.city}, {s.province}
 									</span>
-									<span>{s.properties} Properties</span>
+									<span>Explore listings</span>
 								</div>
 							</Link>
 						))}

@@ -287,3 +287,21 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
+
+.teamSubRole {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.teamContact {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-secondary);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
