@@ -74,8 +74,17 @@ export default function AgentProfilePage() {
 					</div>
 
 					<div className={styles.agentInfo}>
-						<div className={styles.verifiedBadge}>
-							<ShieldCheck size={14} /> BSK Verified Professional
+						<div className={styles.badgeRow}>
+							{agentData.isOfficialAgent && (
+								<div className={styles.officialBadge}>
+									<ShieldCheck size={14} /> Official BSK Partner
+								</div>
+							)}
+							{agentData.isVerified && (
+								<div className={styles.verifiedBadge}>
+									<CheckCircle2 size={14} /> Verified Professional
+								</div>
+							)}
 						</div>
 						<h1 className={styles.name}>{agentData.name}</h1>
 						<p className={styles.role}>{agentData.role || "Property Consultant"}</p>

@@ -77,7 +77,14 @@
     flex: 1;
 }
 
-.verifiedBadge {
+.badgeRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.officialBadge, .verifiedBadge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -90,8 +97,13 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
 }
+
+.officialBadge {
+    background-color: rgba(var(--color-primary-rgb), 0.15);
+    border-color: var(--color-primary);
+}
+
 
 .name {
     font-size: 3.5rem;

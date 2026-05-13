@@ -70,14 +70,9 @@ export default function Footer() {
 			<div className={styles.top}>
 				<div className={styles.topInner}>
 
-					{/* Brand */}
 					<div className={styles.brand}>
 						<Link to="/" className={styles.brandLogo}>
-							<span className={styles.brandBox}>BSK</span>
-							<span className={styles.brandText}>
-								<span className={styles.brandName}>BSK Groups</span>
-								<span className={styles.brandTagline}>Real Estate</span>
-							</span>
+							<img src="/logo-bsk.png" alt="BSK Groups" className={styles.footerLogo} />
 						</Link>
 						<div className={styles.brandDivider} />
 						<p className={styles.brandDesc}>

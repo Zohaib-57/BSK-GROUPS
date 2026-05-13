@@ -83,34 +83,21 @@
   gap: 0.75rem;
   text-decoration: none;
 }
-.brandBox {
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-  color: #fff;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  padding: 0.5rem 0.7rem;
-  border-radius: 8px;
-  line-height: 1;
+.logoImg {
+  height: 48px; /* Standard size */
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--transition);
 }
 
-.brandName {
-  display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--brand);
-  line-height: 1.1;
+.logoImg:hover {
+  transform: scale(1.05);
 }
-.brandTagline {
-  display: block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--brand);
-  margin-top: 0.15rem;
+
+@media (max-width: 600px) {
+  .logoImg {
+    height: 40px; /* Smaller for mobile */
+  }
 }
 
 /* ── Nav links (desktop) ── */

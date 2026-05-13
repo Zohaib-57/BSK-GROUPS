@@ -101,11 +101,7 @@ export default function Navbar() {
 				<div className={styles.navInner}>
 					{/* Logo */}
 					<Link to="/" className={styles.brandLogo} onClick={closeMobile}>
-						<div className={styles.brandBox}>BSK</div>
-						<div className={styles.brandText}>
-							<span className={styles.brandName}>BSK Groups</span>
-							<span className={styles.brandTagline}>Real Estate</span>
-						</div>
+						<img src="/logo-bsk.png" alt="BSK Groups" className={styles.logoImg} />
 					</Link>
 
 					{/* ── Desktop nav links (Centered) ── */}

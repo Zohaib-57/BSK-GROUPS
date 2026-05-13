@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { propertyAPI } from "../utils/api";
+import { propertyAPI, inquiryAPI } from "../utils/api";
 import PropertyCard from "../components/PropertyCard";
 import {
   MapPin, Bed, Bath, Square, Phone, Mail, MessageCircle,
@@ -137,23 +137,25 @@ function OverviewTab({ property }) {
       </div>
 
       {/* Amenities */}
-      <div style={card}>
-        <h2 style={sectionTitle}>Amenities</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12, marginTop: 8 }}>
-          {[
-            { icon: <School size={18} />, label: "Nearby Schools" },
-            { icon: <Hospital size={18} />, label: "Nearby Hospitals" },
-            { icon: <ShoppingBag size={18} />, label: "Shopping Malls" },
-            { icon: <Utensils size={18} />, label: "Restaurants" },
-            { icon: <Bus size={18} />, label: "Public Transport" },
-            { icon: <Shield size={18} />, label: "Security Staff" },
-          ].map(({ icon, label }) => (
-            <div key={label} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>
-              <span style={{ color: "#C8A45A" }}>{icon}</span> {label}
-            </div>
-          ))}
+      {property.features && Object.values(property.features).some(v => v === true) && (
+        <div style={card}>
+          <h2 style={sectionTitle}>Amenities & Features</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12, marginTop: 8 }}>
+            {Object.entries(property.features).map(([key, val]) => val && (
+              <div key={key} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 13, color: "#475569" }}>
+                <span style={{ color: "#C8A45A" }}>
+                  {key === "security" ? <Shield size={18} /> : 
+                   key === "swimmingPool" ? <CheckCircle2 size={18} /> :
+                   key === "garden" ? <Home size={18} /> :
+                   key === "gym" ? <TrendingUp size={18} /> :
+                   <CheckCircle2 size={18} />}
+                </span> 
+                {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -344,24 +346,18 @@ export default function PropertyDetailPage() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL || ""}/api/inquiries`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          propertyId: property._id,
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message || `I would like to inquire about ${property.title}. Please contact me at your earliest convenience.`,
-        }),
+      await inquiryAPI.create({
+        propertyId: property._id,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message || `I would like to inquire about ${property.title}. Please contact me at your earliest convenience.`,
+        role: formData.role,
       });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message);
       toast.success("Message sent! The agent will contact you soon.");
       setFormData({ name: "", email: "", phone: "", message: "", role: "buyer" });
     } catch (err) {
-      toast.error(err.message || "Failed to send. Please try again.");
+      toast.error(err.response?.data?.message || err.message || "Failed to send. Please try again.");
     } finally {
       setSubmitting(false);
     }

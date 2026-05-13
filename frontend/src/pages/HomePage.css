@@ -110,6 +110,31 @@
 	color: var(--hp-brand);
 }
 
+.hp-eyebrow--premium {
+	color: #fff;
+	background: linear-gradient(90deg, var(--hp-brand), var(--hp-accent));
+	display: inline-block;
+	padding: 4px 12px;
+	border-radius: 20px;
+	margin-bottom: 12px;
+}
+
+.hp-section--premium {
+	background: linear-gradient(180deg, #fdfaf5 0%, #fff 100%);
+	border-bottom: 1px solid var(--hp-border);
+}
+
+.hp-view-all--premium {
+	background: var(--hp-brand);
+	color: #fff;
+	border: none;
+}
+
+.hp-view-all--premium:hover {
+	background: var(--hp-brand-dark);
+	color: #fff;
+}
+
 /* Accent text */
 .hp-accent {
 	color: var(--hp-accent);

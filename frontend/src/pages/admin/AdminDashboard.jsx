@@ -52,27 +52,27 @@ export default function AdminDashboard() {
 	const statCards = [
 		{ 
 			label: "Total Properties", 
-			value: stats?.totalProperties || "124", 
+			value: stats?.stats?.totalProperties ?? 0, 
 			icon: Building2, 
 			trend: "+12%" 
 		},
 		{ 
-			label: "Active Users", 
-			value: stats?.totalUsers || "842", 
+			label: "Total Agents", 
+			value: stats?.stats?.totalAgents ?? 0, 
 			icon: Users, 
 			trend: "+5%" 
 		},
 		{ 
 			label: "Inquiries", 
-			value: stats?.totalInquiries || "28", 
+			value: stats?.stats?.totalInquiries ?? 0, 
 			icon: MessageSquare, 
 			trend: "+18%" 
 		},
 		{ 
-			label: "Blog Posts", 
-			value: stats?.totalBlogs || "15", 
-			icon: BookOpen, 
-			trend: "0%" 
+			label: "Total Views", 
+			value: stats?.stats?.totalViews ?? 0, 
+			icon: Eye, 
+			trend: "+24%" 
 		},
 	];
 

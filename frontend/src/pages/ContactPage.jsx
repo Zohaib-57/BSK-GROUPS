@@ -33,7 +33,7 @@ const OFFICE_DIRECTORY = [
 ];
 
 export default function ContactPage() {
-	const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+	const [form, setForm] = useState({ name: "", email: "", phone: "", role: "buyer", subject: "", message: "" });
 	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e) => {
@@ -45,7 +45,7 @@ export default function ContactPage() {
 				message: `[${form.subject}] ${form.message}`
 			});
 			toast.success("Message sent! We will contact you soon.");
-			setForm({ name: "", email: "", subject: "", message: "" });
+			setForm({ name: "", email: "", phone: "", role: "buyer", subject: "", message: "" });
 		} catch (err) {
 			toast.error("Failed to send message. Please try again.");
 		} finally {
@@ -118,6 +118,29 @@ export default function ContactPage() {
 										onChange={(e) => setForm({...form, email: e.target.value})}
 										required 
 									/>
+								</div>
+								<div className={styles.inputGroup}>
+									<label className={styles.label}>Phone Number</label>
+									<input 
+										type="tel" 
+										placeholder="+92 300 1234567" 
+										className={styles.input} 
+										value={form.phone}
+										onChange={(e) => setForm({...form, phone: e.target.value})}
+										required 
+									/>
+								</div>
+								<div className={styles.inputGroup}>
+									<label className={styles.label}>I am a...</label>
+									<select 
+										className={styles.input}
+										value={form.role}
+										onChange={(e) => setForm({...form, role: e.target.value})}
+									>
+										<option value="buyer">Buyer / Investor</option>
+										<option value="agent">Real Estate Agent</option>
+										<option value="other">Other</option>
+									</select>
 								</div>
 								<div className={`${styles.inputGroup} col-span-full`}>
 									<label className={styles.label}>Subject</label>

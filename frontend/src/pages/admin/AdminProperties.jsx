@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, Plus, Trash2, Edit2, Eye, MapPin, Check, Clock } from "lucide-react";
+import { Search, Plus, Trash2, Edit2, Eye, MapPin, Check, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { adminAPI } from "../../utils/api";
 import styles from "./AdminTable.module.css";
@@ -21,6 +21,16 @@ export default function AdminProperties() {
 			refetch();
 		} catch (error) {
 			toast.error("Failed to update status");
+		}
+	};
+
+	const handleToggleFeatured = async (id, currentStatus) => {
+		try {
+			await adminAPI.updateProperty(id, { isFeatured: !currentStatus });
+			toast.success(`Property ${!currentStatus ? "added to" : "removed from"} featured`);
+			refetch();
+		} catch (error) {
+			toast.error("Failed to update featured status");
 		}
 	};
 
@@ -174,6 +184,13 @@ export default function AdminProperties() {
 													<Clock size={16} />
 												</button>
 											)}
+											<button 
+												className={`${styles.actionBtn} ${prop.isFeatured ? "text-yellow-500" : "text-gray-300"}`} 
+												onClick={() => handleToggleFeatured(prop._id, prop.isFeatured)}
+												title={prop.isFeatured ? "Remove from Featured" : "Make Featured"}
+											>
+												<Star size={16} fill={prop.isFeatured ? "currentColor" : "none"} />
+											</button>
 											<Link to={`/properties/${prop.slug}`} className={styles.actionBtn} title="View Live">
 												<Eye size={16} />
 											</Link>

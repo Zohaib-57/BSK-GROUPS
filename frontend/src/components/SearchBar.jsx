@@ -11,6 +11,7 @@ const CITIES = [
 	"Rawalpindi",
 	"Mardan",
 	"Abbottabad",
+	"Nowshera",
 ];
 
 const PROPERTY_TYPES = [

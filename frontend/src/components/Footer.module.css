@@ -114,41 +114,11 @@
 /* ── Brand Column ── */
 
 
-.brandLogo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
-  text-decoration: none;
-}
-.brandBox {
-  background: linear-gradient(135deg, var(--f-green) 0%, #a97530 100%);
-  color: var(--f-ink);
-  font-family: 'Syne', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  padding: 0.5rem 0.7rem;
-  border-radius: var(--f-r-sm);
-  line-height: 1;
-}
-
-.brandName {
-  display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--f-white);
-  line-height: 1.1;
-}
-.brandTagline {
-  display: block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--f-green);
-  margin-top: 0.15rem;
+.footerLogo {
+  height: 54px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
 }
  
 .brandDesc {

@@ -132,16 +132,20 @@ export default function HomePage() {
 			propertyAPI
 				.getAll({ sort: "newest", limit: 8, page: 1 })
 				.then((r) => r.data),
-		staleTime: 0,
-		refetchOnMount: "always",
-		refetchOnWindowFocus: true,
 	});
+
+	const { data: featuredData } = useQuery({
+		queryKey: ["featured-properties"],
+		queryFn: () => propertyAPI.getFeatured().then((r) => r.data),
+	});
+
 	const { data: blogsData } = useQuery({
 		queryKey: ["featured-blogs"],
 		queryFn: () => blogAPI.getFeatured().then((r) => r.data),
 	});
 
 	const properties = latestData?.properties ?? [];
+	const featuredProperties = featuredData?.properties ?? [];
 	const blogs = blogsData?.blogs ?? [];
 
 	return (
@@ -187,6 +191,31 @@ export default function HomePage() {
 					</div>
 				</div>
 			</section>
+
+			{/* ════════════════════════════════════════
+			    PREMIUM FEATURED LISTINGS
+			════════════════════════════════════════ */}
+			{featuredProperties.length > 0 && (
+				<section className="hp-section hp-section--premium">
+					<div className="hp-container">
+						<div className="hp-section__header hp-section__header--between">
+							<div>
+								<p className="hp-eyebrow hp-eyebrow--premium">Handpicked for You</p>
+								<h2 className="hp-section__title">Premium Featured Listings</h2>
+							</div>
+							<Link to="/properties?isFeatured=true" className="hp-view-all hp-view-all--premium">
+								Explore Premium <ArrowRight size={16} />
+							</Link>
+						</div>
+
+						<div className="hp-properties-grid">
+							{featuredProperties.slice(0, 4).map((p) => (
+								<PropertyCard key={p._id} property={p} />
+							))}
+						</div>
+					</div>
+				</section>
+			)}
 
 			{/* ════════════════════════════════════════
 			    CATEGORIES

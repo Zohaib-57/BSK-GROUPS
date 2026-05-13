@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import api from "../utils/api";
-import { Phone, Mail, Building2, MapPin, ChevronRight, Users, Star, ShieldCheck } from "lucide-react";
+import { Phone, Mail, Building2, MapPin, ChevronRight, Users, Star, ShieldCheck, CheckCircle2 } from "lucide-react";
 import styles from "./AgentsPage.module.css";
 
 
@@ -93,10 +93,18 @@ export default function AgentsPage() {
 										)}
 										{agent.online && <span className={styles.onlineBadge} />}
 									</div>
-									<h3 className={styles.agentName}>{agent.name}</h3>
+									<h3 className={styles.agentName}>
+										{agent.name}
+										{agent.isVerified && <CheckCircle2 size={16} className={styles.verifiedIcon} />}
+									</h3>
 									<p className={styles.agentRole}>{agent.role || "Property Expert"}</p>
+									{agent.isOfficialAgent && (
+										<div className={styles.officialBadge}>
+											Official BSK Partner
+										</div>
+									)}
 									<div className={styles.agentCity}>
-										<MapPin size={14} className="text-primary" /> {agent.city}
+										<MapPin size={14} className="text-primary" /> {agent.city || "Pakistan"}
 									</div>
 								</div>
 

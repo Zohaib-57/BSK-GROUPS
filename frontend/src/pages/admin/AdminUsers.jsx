@@ -13,6 +13,26 @@ export default function AdminUsers() {
 		queryFn: () => adminAPI.getAllUsers({ keyword: searchTerm }).then((r) => r.data),
 	});
 
+	const handleRoleChange = async (id, newRole) => {
+		try {
+			await adminAPI.updateUser(id, { role: newRole });
+			toast.success(`Role updated to ${newRole}`);
+			refetch();
+		} catch (error) {
+			toast.error("Failed to update role");
+		}
+	};
+
+	const handleToggleOfficial = async (id, currentStatus) => {
+		try {
+			await adminAPI.updateUser(id, { isOfficialAgent: !currentStatus });
+			toast.success(`Official status ${!currentStatus ? "enabled" : "disabled"}`);
+			refetch();
+		} catch (error) {
+			toast.error("Failed to update official status");
+		}
+	};
+
 	const handleDelete = (id) => {
 		toast((t) => (
 			<div className="flex flex-col gap-3">
@@ -125,12 +145,27 @@ export default function AdminUsers() {
 										</div>
 									</td>
 									<td>
-										<span className={`${styles.badge} ${
-											user.role === 'admin' ? styles.badgeAdmin : 
-											user.role === 'agent' ? styles.badgeAgent : styles.badgeUser
-										}`}>
-											{user.role}
-										</span>
+										<select 
+											className={`${styles.roleSelect} ${
+												user.role === 'admin' ? styles.badgeAdmin : 
+												user.role === 'agent' ? styles.badgeAgent : styles.badgeUser
+											}`}
+											value={user.role}
+											onChange={(e) => handleRoleChange(user._id, e.target.value)}
+										>
+											<option value="user">User</option>
+											<option value="agent">Agent</option>
+											<option value="admin">Admin</option>
+										</select>
+										{user.role === 'agent' && (
+											<button 
+												onClick={() => handleToggleOfficial(user._id, user.isOfficialAgent)}
+												className={`${styles.officialToggle} ${user.isOfficialAgent ? styles.isOfficial : ""}`}
+												title={user.isOfficialAgent ? "Remove Official Status" : "Make Official BSK Partner"}
+											>
+												{user.isOfficialAgent ? "★ Official" : "☆ Make Official"}
+											</button>
+										)}
 									</td>
 									<td className="text-gray-500 font-medium">
 										{new Date(user.createdAt).toLocaleDateString()}

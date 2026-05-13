@@ -35,6 +35,7 @@ const CITIES = [
 	"Rawalpindi",
 	"Mardan",
 	"Abbottabad",
+	"Nowshera",
 ];
 const SORTS = [
 	{ value: "newest", label: "Newest First" },
@@ -68,6 +69,28 @@ export default function PropertiesPage() {
 		page: Number(searchParams.get("page")) || 1,
 	});
 
+	// Sync URL -> State
+	useEffect(() => {
+		setFilters({
+			purpose: searchParams.get("purpose") || "",
+			type: searchParams.get("type") || "",
+			city: searchParams.get("city") || "",
+			area: searchParams.get("area") || "",
+			society: searchParams.get("society") || "",
+			keyword: searchParams.get("keyword") || "",
+			minPrice: searchParams.get("minPrice") || "",
+			maxPrice: searchParams.get("maxPrice") || "",
+			minArea: searchParams.get("minArea") || "",
+			maxArea: searchParams.get("maxArea") || "",
+			areaUnit: searchParams.get("areaUnit") || "",
+			bedrooms: searchParams.get("bedrooms") || "",
+			bathrooms: searchParams.get("bathrooms") || "",
+			isFeatured: searchParams.get("isFeatured") || "",
+			sort: searchParams.get("sort") || "newest",
+			page: Number(searchParams.get("page")) || 1,
+		});
+	}, [searchParams]);
+
 	const queryParams = Object.fromEntries(
 		Object.entries(filters).filter(([, v]) => v !== "" && v !== 0),
 	);
@@ -82,35 +105,19 @@ export default function PropertiesPage() {
 	});
 
 	const updateFilter = (key, value) => {
-		setFilters((prev) => ({ ...prev, [key]: value, page: 1 }));
+		const p = new URLSearchParams(searchParams);
+		if (value) p.set(key, value);
+		else p.delete(key);
+		if (key !== "page") p.set("page", "1");
+		setSearchParams(p);
 	};
 
 	const clearFilters = () => {
-		setFilters({
-			purpose: "",
-			type: "",
-			city: "",
-			keyword: "",
-			minPrice: "",
-			maxPrice: "",
-			minArea: "",
-			maxArea: "",
-			areaUnit: "",
-			bedrooms: "",
-			bathrooms: "",
-			isFeatured: "",
-			sort: "newest",
-			page: 1,
-		});
+		setSearchParams({});
 	};
 
-	useEffect(() => {
-		const p = new URLSearchParams();
-		Object.entries(filters).forEach(([k, v]) => {
-			if (v) p.set(k, v);
-		});
-		setSearchParams(p);
-	}, [filters]);
+	// URL is now the source of truth, filters state is updated by useEffect above
+
 
 	const activeFiltersCount = [
 		filters.purpose,

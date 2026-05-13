@@ -19,6 +19,11 @@ const formatPrice = (price) => {
 	return price.toLocaleString();
 };
 
+const optimizeImage = (url, width = 600, height = 450) => {
+	if (!url || !url.includes("cloudinary.com")) return url;
+	return url.replace("/upload/", `/upload/c_fill,w_${width},h_${height},q_auto,f_auto/`);
+};
+
 export default function PropertyCard({ property, horizontal = false }) {
 	const { user } = useAuth();
 	const [saved, setSaved] = useState(
@@ -26,10 +31,12 @@ export default function PropertyCard({ property, horizontal = false }) {
 	);
 	const [saving, setSaving] = useState(false);
 
-	const mainImage =
+	const rawImage =
 		property.images?.find((i) => i.isMain)?.url ||
 		property.images?.[0]?.url ||
 		"/placeholder-property.jpg";
+
+	const mainImage = optimizeImage(rawImage);
 
 	const handleSave = async (e) => {
 		e.preventDefault();
@@ -154,7 +161,7 @@ export default function PropertyCard({ property, horizontal = false }) {
 					<div className="flex items-center gap-1.5 pt-2 border-t border-gray-100 min-h-8">
 						{property.postedBy.avatar ? (
 							<img
-								src={property.postedBy.avatar}
+								src={optimizeImage(property.postedBy.avatar, 60, 60)}
 								alt={property.postedBy.name}
 								className="w-6 h-6 rounded-full object-cover"
 							/>

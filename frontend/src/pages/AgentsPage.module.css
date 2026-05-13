@@ -280,3 +280,30 @@
     align-items: center;
     gap: 0.25rem;
 }
+
+.verifiedIcon {
+    color: #c9923a;
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.officialBadge {
+    display: inline-block;
+    background: #c9923a;
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+}
+
+.badgeRow {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
