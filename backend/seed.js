@@ -30,16 +30,49 @@ const seedData = async () => {
 		await admin.save();
 		console.log("Admin user created.");
 
-		// Create Agent User
-		const agent = new User({
-			name: "Expert Agent",
-			email: "agent@bskgroup.com",
-			password: "agent123456",
-			role: "agent",
-			isVerified: true
-		});
-		await agent.save();
-		console.log("Agent user created.");
+		// Create Elite Agents
+		const agents = [
+			{
+				name: "Zarak Khan",
+				email: "zarak.khan@bskgroups.com",
+				password: "agent123456",
+				role: "agent",
+				isVerified: true,
+				isOfficialAgent: true,
+				city: "Peshawar",
+				avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400"
+			},
+			{
+				name: "Arsalan Ahmed",
+				email: "arsalan@bskgroup.com",
+				password: "agent123456",
+				role: "agent",
+				isVerified: true,
+				isOfficialAgent: true,
+				city: "Islamabad",
+				avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400"
+			},
+			{
+				name: "Sara Malik",
+				email: "sara@bskgroup.com",
+				password: "agent123456",
+				role: "agent",
+				isVerified: true,
+				isOfficialAgent: false,
+				city: "Lahore",
+				avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400"
+			}
+		];
+
+		const createdAgents = [];
+		for (const a of agents) {
+			const user = new User(a);
+			await user.save();
+			createdAgents.push(user);
+		}
+		console.log(`${createdAgents.length} agents created.`);
+
+		const agent = createdAgents[0]; // Primary agent for property links
 
 		const properties = [
 			// PESHAWAR

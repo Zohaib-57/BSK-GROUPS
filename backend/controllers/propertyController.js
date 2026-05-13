@@ -80,12 +80,19 @@ export const getProperties = asyncHandler(async (req, res) => {
 	if (isVerified === "true") query.isVerified = true;
 
 	if (keyword) {
-		query.$or = [
-			{ title: new RegExp(keyword, "i") },
-			{ description: new RegExp(keyword, "i") },
-			{ "location.address": new RegExp(keyword, "i") },
-			{ "location.society": new RegExp(keyword, "i") },
-		];
+		const keywords = keyword.split(" ").filter((k) => k.length > 0);
+		const keywordQuery = keywords.map((k) => ({
+			$or: [
+				{ title: new RegExp(k, "i") },
+				{ description: new RegExp(k, "i") },
+				{ "location.address": new RegExp(k, "i") },
+				{ "location.society": new RegExp(k, "i") },
+				{ "location.city": new RegExp(k, "i") },
+				{ "location.area": new RegExp(k, "i") },
+				{ type: new RegExp(k, "i") },
+			],
+		}));
+		query.$and = query.$and ? [...query.$and, ...keywordQuery] : keywordQuery;
 	}
 
 	const sortOptions = {

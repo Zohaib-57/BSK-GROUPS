@@ -12,6 +12,11 @@ const inquirySchema = new Schema(
 		email: { type: String, required: true },
 		phone: { type: String },
 		message: { type: String, required: true },
+		role: {
+			type: String,
+			enum: ["buyer", "agent", "other"],
+			default: "buyer",
+		},
 		status: {
 			type: String,
 			enum: ["new", "read", "replied", "closed"],

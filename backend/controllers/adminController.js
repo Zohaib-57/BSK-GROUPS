@@ -13,7 +13,8 @@ export const getDashboardStats = asyncHandler(async (req, res) => {
 		totalUsers,
 		totalAgents,
 		totalBlogs,
-		totalInquiries
+		totalInquiries,
+		totalViewsResult
 	] = await Promise.all([
 		Property.countDocuments(),
 		Property.countDocuments({ isApproved: true }),
@@ -22,8 +23,11 @@ export const getDashboardStats = asyncHandler(async (req, res) => {
 		User.countDocuments({ role: "user" }),
 		User.countDocuments({ role: "agent" }),
 		Blog.countDocuments(),
-		Inquiry.countDocuments()
+		Inquiry.countDocuments(),
+		Property.aggregate([{ $group: { _id: null, total: { $sum: "$views" } } }])
 	]);
+
+	const totalViews = totalViewsResult[0]?.total || 0;
 
 	res.json({
 		success: true,
@@ -35,7 +39,8 @@ export const getDashboardStats = asyncHandler(async (req, res) => {
 			totalUsers,
 			totalAgents,
 			totalBlogs,
-			totalInquiries
+			totalInquiries,
+			totalViews
 		},
 	});
 });

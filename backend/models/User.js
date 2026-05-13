@@ -12,6 +12,7 @@ const userSchema = new Schema(
 			trim: true,
 		},
 		phone: { type: String, trim: true },
+		city: { type: String, default: "Peshawar" },
 		password: {
 			type: String,
 			required: [true, "Password is required"],
@@ -27,6 +28,7 @@ const userSchema = new Schema(
 		resetPasswordExpire: Date,
 		refreshToken: { type: String, select: false },
 		isActive: { type: Boolean, default: true },
+		isOfficialAgent: { type: Boolean, default: false },
 	},
 	{ timestamps: true },
 );

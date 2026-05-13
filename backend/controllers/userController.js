@@ -100,6 +100,23 @@ export const updateUserStatus = asyncHandler(async (req, res) => {
 	);
 	res.json({ success: true, user });
 });
+export const updateUserAdmin = asyncHandler(async (req, res) => {
+	const { role, isVerified, isOfficialAgent, isActive, city } = req.body;
+	const user = await User.findByIdAndUpdate(
+		req.params.id,
+		{ role, isVerified, isOfficialAgent, isActive, city },
+		{ returnDocument: "after", runValidators: true },
+	);
+
+	if (!user) {
+		return res
+			.status(404)
+			.json({ success: false, message: "User not found" });
+	}
+
+	res.json({ success: true, user });
+});
+
 export const deleteUser = asyncHandler(async (req, res) => {
 	const user = await User.findById(req.params.id);
 

@@ -12,8 +12,23 @@ router.get(
 		const agents = await User.find({
 			role: "agent",
 			isActive: true,
-		}).select("name email phone avatar role");
-		res.json({ success: true, agents });
+		}).select("name email phone avatar role isVerified isOfficialAgent city");
+
+		// Fetch listings count for each agent
+		const agentsWithCounts = await Promise.all(
+			agents.map(async (agent) => {
+				const count = await Property.countDocuments({
+					postedBy: agent._id,
+					isApproved: true,
+				});
+				return {
+					...agent.toObject(),
+					listingsCount: count,
+				};
+			})
+		);
+
+		res.json({ success: true, agents: agentsWithCounts });
 	}),
 );
 
@@ -21,16 +36,18 @@ router.get(
 	"/:id",
 	asyncHandler(async (req, res) => {
 		const agent = await User.findById(req.params.id).select(
-			"name email phone avatar createdAt",
+			"name email phone avatar createdAt role isVerified isOfficialAgent city",
 		);
 		if (!agent)
 			return res
 				.status(404)
 				.json({ success: false, message: "Agent not found" });
+
 		const properties = await Property.find({
 			postedBy: req.params.id,
 			isApproved: true,
-		}).limit(6);
+		}).limit(12);
+
 		res.json({ success: true, agent, properties });
 	}),
 );

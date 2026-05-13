@@ -4,39 +4,67 @@ import asyncHandler from "express-async-handler";
 import sendEmail from "../utils/sendEmail.js";
 
 export const createInquiry = asyncHandler(async (req, res) => {
-	const { propertyId, name, email, phone, message } = req.body;
+	const { propertyId, name, email, phone, message, role } = req.body;
 
-	const property = await Property.findById(propertyId).populate(
-		"postedBy",
-		"email name",
-	);
-	if (!property)
-		return res
-			.status(404)
-			.json({ success: false, message: "Property not found" });
+	let property = null;
+	let agentId = null;
+	let recipientEmail = process.env.ADMIN_EMAIL || "info@bskgroups.com";
+
+	if (propertyId) {
+		property = await Property.findById(propertyId).populate(
+			"postedBy",
+			"email name",
+		);
+		if (property) {
+			agentId = property.postedBy._id;
+			recipientEmail = property.postedBy.email;
+			property.inquiries += 1;
+			await property.save({ validateBeforeSave: false });
+		}
+	}
 
 	const inquiry = await Inquiry.create({
-		property: propertyId,
+		property: propertyId || null,
 		sender: req.user?._id,
-		agent: property.postedBy._id,
+		agent: agentId,
 		name,
 		email,
 		phone,
 		message,
+		role: role || "other",
 	});
 
-	property.inquiries += 1;
-	await property.save({ validateBeforeSave: false });
-
+	// Notify recipient (Agent or Admin)
 	try {
 		await sendEmail({
-			to: property.postedBy.email,
-			subject: `New Inquiry for: ${property.title}`,
-			html: `<p><strong>${name}</strong> is interested in your property <strong>${property.title}</strong>.</p>
-        <p>Message: ${message}</p><p>Contact: ${email} | ${phone}</p>`,
+			to: recipientEmail,
+			subject: property 
+				? `New Property Inquiry: ${property.title}` 
+				: `New General Contact: ${name}`,
+			html: `
+				<h3>New Inquiry Received</h3>
+				<p><strong>Name:</strong> ${name}</p>
+				<p><strong>Email:</strong> ${email}</p>
+				<p><strong>Phone:</strong> ${phone}</p>
+				<p><strong>Role:</strong> ${role || "Not specified"}</p>
+				${property ? `<p><strong>Property:</strong> ${property.title}</p>` : ""}
+				<p><strong>Message:</strong></p>
+				<div style="padding: 15px; background: #f4f4f4; border-radius: 5px;">
+					${message}
+				</div>
+			`,
 		});
+
+		// Also notify Admin if it was a property inquiry (as a backup)
+		if (property && process.env.ADMIN_EMAIL && recipientEmail !== process.env.ADMIN_EMAIL) {
+			await sendEmail({
+				to: process.env.ADMIN_EMAIL,
+				subject: `[ADMIN COPY] Property Inquiry: ${property.title}`,
+				html: `<p>Admin copy of inquiry sent to agent ${property.postedBy.name}.</p><hr/>` + message
+			});
+		}
 	} catch (e) {
-		console.log("Email error:", e.message);
+		console.log("Email notification failed:", e.message);
 	}
 
 	res

@@ -9,6 +9,7 @@ import {
 	getSavedProperties,
 	getAllUsers,
 	updateUserStatus,
+	updateUserAdmin,
 	deleteUser,
 } from "../controllers/userController.js";
 import { protect, authorize } from "../middleware/auth.js";
@@ -20,6 +21,7 @@ router.post("/save-property/:propertyId", protect, saveProperty);
 router.get("/saved-properties", protect, getSavedProperties);
 router.get("/", protect, authorize("admin"), getAllUsers);
 router.put("/:id/status", protect, authorize("admin"), updateUserStatus);
+router.put("/:id", protect, authorize("admin"), updateUserAdmin);
 router.delete("/:id", protect, authorize("admin"), deleteUser);
 
 export default router;
