@@ -80,9 +80,10 @@ export const getProperties = asyncHandler(async (req, res) => {
 	if (isVerified === "true") query.isVerified = true;
 
 	if (keyword) {
-		const keywords = keyword.split(" ").filter((k) => k.length > 0);
-		const keywordQuery = keywords.map((k) => ({
-			$or: [
+		const KNOWN_TYPES = ["house", "apartment", "plot", "commercial", "villa", "farmhouse", "room", "office", "shop", "warehouse"];
+		const keywords = keyword.trim().split(/\s+/).filter((k) => k.length > 0);
+		const keywordQuery = keywords.map((k) => {
+			const orConditions = [
 				{ title: new RegExp(k, "i") },
 				{ description: new RegExp(k, "i") },
 				{ "location.address": new RegExp(k, "i") },
@@ -90,8 +91,13 @@ export const getProperties = asyncHandler(async (req, res) => {
 				{ "location.city": new RegExp(k, "i") },
 				{ "location.area": new RegExp(k, "i") },
 				{ type: new RegExp(k, "i") },
-			],
-		}));
+			];
+			// If keyword exactly matches a property type, include it as a direct match too
+			if (KNOWN_TYPES.includes(k.toLowerCase())) {
+				orConditions.push({ type: k.toLowerCase() });
+			}
+			return { $or: orConditions };
+		});
 		query.$and = query.$and ? [...query.$and, ...keywordQuery] : keywordQuery;
 	}
 

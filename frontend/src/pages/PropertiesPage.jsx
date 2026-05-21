@@ -12,6 +12,8 @@ import {
 	ChevronDown,
 	X,
 	Search,
+	MapPin,
+	Building2,
 } from "lucide-react";
 
 const TYPES = [
@@ -116,15 +118,19 @@ export default function PropertiesPage() {
 		setSearchParams({});
 	};
 
-	// URL is now the source of truth, filters state is updated by useEffect above
-
-
+	// Count active filters (excluding sort & page)
 	const activeFiltersCount = [
 		filters.purpose,
 		filters.type,
+		filters.city,
+		filters.area,
+		filters.society,
+		filters.keyword,
 		filters.minPrice,
 		filters.maxPrice,
 		filters.minArea,
+		filters.maxArea,
+		filters.areaUnit,
 		filters.bedrooms,
 		filters.bathrooms,
 		filters.isFeatured,
@@ -133,14 +139,17 @@ export default function PropertiesPage() {
 	return (
 		<>
 			<Helmet>
-				<title>Properties for Sale & Rent in Peshawar | BSK Groups</title>
+				<title>Properties for Sale &amp; Rent in Peshawar | BSK Groups</title>
 			</Helmet>
 
 			{/* Page Header */}
 			<div className={styles.pageHeader}>
 				<div className={styles.container}>
 					<h1 className={styles.pageTitle}>
-						Properties {filters.city ? `in ${filters.city}` : ""}
+						Properties
+						{filters.city ? ` in ${filters.city}` : ""}
+						{filters.area ? ` — ${filters.area}` : ""}
+						{filters.society ? ` (${filters.society})` : ""}
 					</h1>
 					<p className={styles.pageSubtitle}>
 						{data?.total || 0} properties found
@@ -236,7 +245,7 @@ export default function PropertiesPage() {
 						</div>
 					</div>
 
-					{/* Filters Panel */}
+					{/* ── Advanced Filters Panel ── */}
 					{showFilters && (
 						<div className={styles.filtersPanel}>
 							{/* Panel Header */}
@@ -291,6 +300,42 @@ export default function PropertiesPage() {
 											</option>
 										))}
 									</select>
+								</div>
+
+								{/* Area / Town / Colony */}
+								<div className={styles.filterGroup}>
+									<label className={styles.filterLabel}>
+										<MapPin size={12} style={{ display: "inline", marginRight: 4 }} />
+										Area / Town / Colony
+									</label>
+									<div className={styles.searchWrapper}>
+										<MapPin size={18} className={styles.searchIcon} />
+										<input
+											type="text"
+											className={styles.searchInput}
+											placeholder="e.g. Hayatabad, Bahria Town…"
+											value={filters.area}
+											onChange={(e) => updateFilter("area", e.target.value)}
+										/>
+									</div>
+								</div>
+
+								{/* Society / Project */}
+								<div className={styles.filterGroup}>
+									<label className={styles.filterLabel}>
+										<Building2 size={12} style={{ display: "inline", marginRight: 4 }} />
+										Society / Project
+									</label>
+									<div className={styles.searchWrapper}>
+										<Building2 size={18} className={styles.searchIcon} />
+										<input
+											type="text"
+											className={styles.searchInput}
+											placeholder="e.g. Park View City, DHA…"
+											value={filters.society}
+											onChange={(e) => updateFilter("society", e.target.value)}
+										/>
+									</div>
 								</div>
 
 								{/* Min Price */}
@@ -386,7 +431,7 @@ export default function PropertiesPage() {
 										<input
 											type="text"
 											className={styles.searchInput}
-											placeholder="Search location..."
+											placeholder="Search title, description…"
 											value={filters.keyword}
 											onChange={(e) => updateFilter("keyword", e.target.value)}
 										/>

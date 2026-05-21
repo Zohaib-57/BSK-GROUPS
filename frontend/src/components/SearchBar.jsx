@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, MapPin, Home, ChevronDown } from "lucide-react";
+import { Search, MapPin, Home, Building2, ChevronDown } from "lucide-react";
 import styles from "./SearchBar.module.css";
 
 const CITIES = [
@@ -22,6 +22,10 @@ const PROPERTY_TYPES = [
 	{ value: "commercial", label: "Commercial" },
 	{ value: "villa", label: "Villa" },
 	{ value: "farmhouse", label: "Farmhouse" },
+	{ value: "room", label: "Room" },
+	{ value: "office", label: "Office" },
+	{ value: "shop", label: "Shop" },
+	{ value: "warehouse", label: "Warehouse" },
 ];
 
 export default function SearchBar({ hero = false }) {
@@ -29,6 +33,8 @@ export default function SearchBar({ hero = false }) {
 	const [purpose, setPurpose] = useState("sale");
 	const [type, setType] = useState("");
 	const [city, setCity] = useState("");
+	const [area, setArea] = useState("");
+	const [society, setSociety] = useState("");
 	const [keyword, setKeyword] = useState("");
 
 	const handleSearch = (e) => {
@@ -37,6 +43,8 @@ export default function SearchBar({ hero = false }) {
 		params.set("purpose", purpose);
 		if (type) params.set("type", type);
 		if (city) params.set("city", city);
+		if (area.trim()) params.set("area", area.trim());
+		if (society.trim()) params.set("society", society.trim());
 		if (keyword.trim()) params.set("keyword", keyword.trim());
 		navigate(`/properties?${params.toString()}`);
 	};
@@ -120,6 +128,38 @@ export default function SearchBar({ hero = false }) {
 
 				<div className={styles.divider} />
 
+				{/* Area / Town / Colony */}
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<MapPin size={11} /> Area / Town
+					</label>
+					<input
+						type="text"
+						placeholder="e.g. Hayatabad"
+						className={styles.input}
+						value={area}
+						onChange={(e) => setArea(e.target.value)}
+					/>
+				</div>
+
+				<div className={styles.divider} />
+
+				{/* Society / Project */}
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<Building2 size={11} /> Society / Project
+					</label>
+					<input
+						type="text"
+						placeholder="e.g. Park View City"
+						className={styles.input}
+						value={society}
+						onChange={(e) => setSociety(e.target.value)}
+					/>
+				</div>
+
+				<div className={styles.divider} />
+
 				{/* Keyword */}
 				<div className={`${styles.field} ${styles.fieldGrow}`}>
 					<label className={styles.label}>
@@ -127,7 +167,7 @@ export default function SearchBar({ hero = false }) {
 					</label>
 					<input
 						type="text"
-						placeholder="Area, project, society…"
+						placeholder="Title, description…"
 						className={styles.input}
 						value={keyword}
 						onChange={(e) => setKeyword(e.target.value)}
@@ -186,11 +226,37 @@ export default function SearchBar({ hero = false }) {
 
 				<div className={styles.mobileField}>
 					<label className={styles.label}>
+						<MapPin size={11} /> Area / Town / Colony
+					</label>
+					<input
+						type="text"
+						placeholder="e.g. Hayatabad, Bahria Town"
+						className={styles.input}
+						value={area}
+						onChange={(e) => setArea(e.target.value)}
+					/>
+				</div>
+
+				<div className={styles.mobileField}>
+					<label className={styles.label}>
+						<Building2 size={11} /> Society / Project
+					</label>
+					<input
+						type="text"
+						placeholder="e.g. Park View City"
+						className={styles.input}
+						value={society}
+						onChange={(e) => setSociety(e.target.value)}
+					/>
+				</div>
+
+				<div className={styles.mobileField}>
+					<label className={styles.label}>
 						<Search size={11} /> Keyword
 					</label>
 					<input
 						type="text"
-						placeholder="Area, project, society…"
+						placeholder="Title, description…"
 						className={styles.input}
 						value={keyword}
 						onChange={(e) => setKeyword(e.target.value)}

@@ -276,6 +276,50 @@
     justify-content: center;
 }
 
+/* Filter Grid Layout */
+.filterGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .filterGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .filterGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .filterGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Search Wrapper (icon + input) */
+.searchWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    color: rgba(156, 163, 175, 1);
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.searchInput {
+    padding-left: 3rem !important;
+}
+
 /* Filter Groups & Inputs */
 .filterGroup {
     display: flex;
