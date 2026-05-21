@@ -10,6 +10,7 @@ export default function RegisterPage() {
 	const { register } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 	
 	const [form, setForm] = useState({
 		name: "",
@@ -58,7 +59,7 @@ export default function RegisterPage() {
 		try {
 			await register(form);
 			toast.success("Account created successfully!");
-			navigate("/");
+			navigate(from, { replace: true });
 		} catch (err) {
 			toast.error(err.response?.data?.message || "Registration failed");
 		} finally {

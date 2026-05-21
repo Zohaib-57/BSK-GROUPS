@@ -26,7 +26,8 @@ export function AuthProvider({ children }) {
 				const { data } = await authAPI.getMe();
 				setUser(data.user || null);
 			} catch (error) {
-				localStorage.clear();
+				localStorage.removeItem("accessToken");
+				localStorage.removeItem("refreshToken");
 			} finally {
 				setLoading(false);
 			}
@@ -39,6 +40,7 @@ export function AuthProvider({ children }) {
 		const { data } = await authAPI.login(credentials);
 		localStorage.setItem("accessToken", data.accessToken);
 		localStorage.setItem("refreshToken", data.refreshToken);
+		localStorage.setItem("isRegistered", "true");
 		setUser(data.user);
 		return data;
 	};
@@ -47,6 +49,7 @@ export function AuthProvider({ children }) {
 		const { data } = await authAPI.register(formData);
 		localStorage.setItem("accessToken", data.accessToken);
 		localStorage.setItem("refreshToken", data.refreshToken);
+		localStorage.setItem("isRegistered", "true");
 		setUser(data.user);
 		return data;
 	};
@@ -57,7 +60,8 @@ export function AuthProvider({ children }) {
 		} catch {
 			// ignore logout errors and clear state anyway
 		}
-		localStorage.clear();
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("refreshToken");
 		setUser(null);
 	};
 

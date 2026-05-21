@@ -675,6 +675,135 @@
 	transform: translateY(-2px);
 }
 
+/* ── Owner Tip in Hero ── */
+.hp-hero__owner-tip {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: -12px;
+	margin-bottom: 36px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	padding: 8px 18px;
+	border-radius: 50px;
+	font-size: 14px;
+	color: #e2e8f0;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hp-hero__owner-tip-btn {
+	background: linear-gradient(135deg, var(--hp-brand) 0%, var(--hp-accent) 100%);
+	color: #fff;
+	border: none;
+	padding: 6px 14px;
+	border-radius: 20px;
+	font-weight: 700;
+	font-size: 12px;
+	cursor: pointer;
+	transition: all 0.25s var(--hp-ease);
+	display: inline-flex;
+	align-items: center;
+	box-shadow: 0 4px 10px rgba(201, 146, 58, 0.3);
+}
+
+.hp-hero__owner-tip-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 14px rgba(245, 166, 35, 0.4);
+	filter: brightness(1.05);
+}
+
+/* ── Owner Promo Banner Section ── */
+.hp-owner-promo-sec {
+	padding: 40px 0;
+	background: var(--hp-white);
+}
+
+.hp-owner-promo-card {
+	background: linear-gradient(135deg, #131b2e 0%, #1e293b 100%);
+	border: 1px solid rgba(201, 146, 58, 0.3);
+	border-radius: var(--hp-radius);
+	padding: 40px 48px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 32px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+	position: relative;
+	overflow: hidden;
+}
+
+.hp-owner-promo-card::before {
+	content: "";
+	position: absolute;
+	top: -50%;
+	right: -20%;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(circle, rgba(201, 146, 58, 0.15) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.hp-owner-promo-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.hp-owner-promo-badge {
+	align-self: flex-start;
+	background: var(--hp-brand-muted);
+	color: var(--hp-brand);
+	border: 1px solid rgba(201, 146, 58, 0.3);
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 4px 12px;
+	border-radius: 20px;
+}
+
+.hp-owner-promo-title {
+	font-size: clamp(20px, 2.5vw, 28px);
+	font-weight: 800;
+	color: #fff;
+	margin: 0;
+	line-height: 1.25;
+}
+
+.hp-owner-promo-desc {
+	font-size: 14.5px;
+	color: #9ca3af;
+	margin: 0;
+	line-height: 1.6;
+	max-width: 700px;
+}
+
+.hp-owner-promo-btn {
+	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 14px 28px;
+	background: linear-gradient(135deg, var(--hp-brand) 0%, var(--hp-accent) 100%);
+	color: #fff;
+	border: none;
+	border-radius: var(--hp-radius-sm);
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.25s var(--hp-ease);
+	box-shadow: 0 4px 16px rgba(201, 146, 58, 0.4);
+}
+
+.hp-owner-promo-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(201, 146, 58, 0.5);
+	filter: brightness(1.05);
+}
+
 /* ════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════ */
@@ -715,6 +844,22 @@
 		flex-direction: column;
 		text-align: center;
 		padding: 40px 32px;
+	}
+
+	.hp-owner-promo-card {
+		flex-direction: column;
+		text-align: center;
+		padding: 40px 32px;
+		gap: 24px;
+	}
+
+	.hp-owner-promo-badge {
+		align-self: center;
+	}
+
+	.hp-owner-promo-btn {
+		width: 100%;
+		justify-content: center;
 	}
 }
 
@@ -771,6 +916,21 @@
 	}
 
 	.hp-cta__btn {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.hp-hero__owner-tip {
+		flex-direction: column;
+		gap: 8px;
+		border-radius: var(--hp-radius-sm);
+		width: 100%;
+		text-align: center;
+		padding: 12px;
+		margin-top: 0;
+	}
+
+	.hp-hero__owner-tip-btn {
 		width: 100%;
 		justify-content: center;
 	}

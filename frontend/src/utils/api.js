@@ -23,7 +23,8 @@ api.interceptors.response.use(
 			original._retry = true;
 			const refreshToken = localStorage.getItem("refreshToken");
 			if (!refreshToken) {
-				localStorage.clear();
+				localStorage.removeItem("accessToken");
+				localStorage.removeItem("refreshToken");
 				window.location.href = "/login";
 				return Promise.reject(err);
 			}
@@ -36,7 +37,8 @@ api.interceptors.response.use(
 				original.headers.Authorization = `Bearer ${data.accessToken}`;
 				return api(original);
 			} catch {
-				localStorage.clear();
+				localStorage.removeItem("accessToken");
+				localStorage.removeItem("refreshToken");
 				window.location.href = "/login";
 			}
 		}

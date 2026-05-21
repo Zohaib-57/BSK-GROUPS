@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { Helmet } from "react-helmet-async";
 import { propertyAPI, blogAPI } from "../utils/api";
 import SearchBar from "../components/SearchBar";
@@ -126,6 +127,19 @@ const WHY_BSK = [
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+	const { user } = useAuth();
+	const navigate = useNavigate();
+
+	const handleAddPropertyClick = (e) => {
+		e.preventDefault();
+		const isRegistered = localStorage.getItem("isRegistered") === "true";
+		if (isRegistered) {
+			navigate("/login", { state: { from: { pathname: "/post-property" } } });
+		} else {
+			navigate("/register", { state: { from: { pathname: "/post-property" } } });
+		}
+	};
+
 	const { data: latestData } = useQuery({
 		queryKey: ["latest-properties"],
 		queryFn: () =>
@@ -181,6 +195,15 @@ export default function HomePage() {
 						<SearchBar hero />
 					</div>
 
+					{!user && (
+						<div className="hp-hero__owner-tip">
+							<span>Are you a property owner or agent?</span>
+							<button onClick={handleAddPropertyClick} className="hp-hero__owner-tip-btn">
+								+ Add Property
+							</button>
+						</div>
+					)}
+
 					<div className="hp-stats">
 						{STATS.map((s) => (
 							<div key={s.label} className="hp-stat">
@@ -212,6 +235,30 @@ export default function HomePage() {
 							{featuredProperties.slice(0, 4).map((p) => (
 								<PropertyCard key={p._id} property={p} />
 							))}
+						</div>
+					</div>
+				</section>
+			)}
+
+			{/* ════════════════════════════════════════
+			    OWNER PROMO BANNER (GUEST ONLY)
+			════════════════════════════════════════ */}
+			{!user && (
+				<section className="hp-owner-promo-sec">
+					<div className="hp-container">
+						<div className="hp-owner-promo-card">
+							<div className="hp-owner-promo-content">
+								<div className="hp-owner-promo-badge">For Property Owners & Agents</div>
+								<h3 className="hp-owner-promo-title">
+									Want to Sell or Rent Your Property?
+								</h3>
+								<p className="hp-owner-promo-desc">
+									Reach thousands of verified buyers and professional dealers in Peshawar & KPK. List your house, plot, or commercial property in 60 seconds.
+								</p>
+							</div>
+							<button onClick={handleAddPropertyClick} className="hp-owner-promo-btn">
+								<Building2 size={16} /> Get Started — Post Property
+							</button>
 						</div>
 					</div>
 				</section>
@@ -359,9 +406,15 @@ export default function HomePage() {
 								seconds.
 							</p>
 						</div>
-						<Link to="/post-property" className="hp-cta__btn">
-							+ Post Your Property
-						</Link>
+						{!user ? (
+							<button onClick={handleAddPropertyClick} className="hp-cta__btn">
+								+ Post Your Property
+							</button>
+						) : (
+							<Link to="/post-property" className="hp-cta__btn">
+								+ Post Your Property
+							</Link>
+						)}
 					</div>
 				</div>
 			</section>
