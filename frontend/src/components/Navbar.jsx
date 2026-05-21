@@ -84,6 +84,17 @@ export default function Navbar() {
 
 	const avatarLetter = user?.name?.[0]?.toUpperCase() ?? "U";
 
+	const handlePostPropertyClick = (e) => {
+		e.preventDefault();
+		closeMobile();
+		const isRegistered = localStorage.getItem("isRegistered") === "true";
+		if (isRegistered) {
+			navigate("/login", { state: { from: { pathname: "/post-property" } } });
+		} else {
+			navigate("/register", { state: { from: { pathname: "/post-property" } } });
+		}
+	};
+
 	return (
 		<header className={styles.header}>
 			{/* ── Top bar ── */}
@@ -271,6 +282,10 @@ export default function Navbar() {
 							</>
 						) : (
 							<>
+								<button onClick={handlePostPropertyClick} className={styles.postBtn}>
+									<Plus size={15} />
+									<span>Post Property</span>
+								</button>
 								<Link to="/login" className={styles.loginBtn}>
 									Login
 								</Link>
@@ -400,11 +415,17 @@ export default function Navbar() {
 								</NavLink>
 								<NavLink
 									to="/register"
-									className={`${styles.mobileLink} ${styles.mobileLinkAccent}`}
+									className={styles.mobileLink}
 									onClick={closeMobile}
 								>
 									<Plus size={15} /> Register
 								</NavLink>
+								<button
+									onClick={handlePostPropertyClick}
+									className={`${styles.mobileLink} ${styles.mobileLinkAccent}`}
+								>
+									<Plus size={15} /> Post Property
+								</button>
 							</>
 						)}
 					</div>
