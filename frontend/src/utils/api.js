@@ -86,6 +86,7 @@ export const userAPI = {
 export const inquiryAPI = {
 	create: (data) => api.post("/inquiries", data),
 	getMyInquiries: () => api.get("/inquiries/my-inquiries"),
+	getAll: () => api.get("/inquiries"), // Admin only
 	updateStatus: (id, status) => api.put(`/inquiries/${id}/status`, { status }),
 };
 

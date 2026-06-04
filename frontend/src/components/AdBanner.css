@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════════
+   AdBanner.css  —  Dynamic Rotating Advertisement Strip
+   ═══════════════════════════════════════════════════ */
+
+/* ── Base Banner ── */
+.ad-banner {
+	position: relative;
+	width: 100%;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	overflow: hidden;
+	z-index: 1000;
+	flex-shrink: 0;
+	cursor: default;
+	user-select: none;
+}
+
+/* ── Theme Variants ── */
+.ad-banner--gold {
+	background: linear-gradient(90deg, #1a1200 0%, #2e1f00 25%, #3d2a00 50%, #2e1f00 75%, #1a1200 100%);
+	border-bottom: 1px solid rgba(201, 146, 58, 0.4);
+}
+
+.ad-banner--blue {
+	background: linear-gradient(90deg, #050c1a 0%, #091428 25%, #0d1c3a 50%, #091428 75%, #050c1a 100%);
+	border-bottom: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.ad-banner--emerald {
+	background: linear-gradient(90deg, #001a0d 0%, #002a15 25%, #003820 50%, #002a15 75%, #001a0d 100%);
+	border-bottom: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.ad-banner--rose {
+	background: linear-gradient(90deg, #1a0008 0%, #2e0010 25%, #3d0018 50%, #2e0010 75%, #1a0008 100%);
+	border-bottom: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+/* ── Animated Orbs ── */
+.ad-banner__orb {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(40px);
+	pointer-events: none;
+	animation: ad-orb-pulse 4s ease-in-out infinite alternate;
+}
+
+.ad-banner__orb--1 {
+	width: 200px;
+	height: 200px;
+	top: -100px;
+	left: 10%;
+	opacity: 0.15;
+}
+
+.ad-banner__orb--2 {
+	width: 160px;
+	height: 160px;
+	top: -80px;
+	right: 15%;
+	opacity: 0.12;
+	animation-delay: 2s;
+}
+
+/* Theme orb colors */
+.ad-banner--gold .ad-banner__orb { background: #c9923a; }
+.ad-banner--blue .ad-banner__orb { background: #3b82f6; }
+.ad-banner--emerald .ad-banner__orb { background: #10b981; }
+.ad-banner--rose .ad-banner__orb { background: #f43f5e; }
+
+@keyframes ad-orb-pulse {
+	0% { transform: scale(1) translateX(0); opacity: 0.1; }
+	100% { transform: scale(1.3) translateX(20px); opacity: 0.2; }
+}
+
+/* ── Content Area ── */
+.ad-banner__content {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	position: relative;
+	z-index: 1;
+	max-width: calc(100% - 140px);
+	flex: 1;
+	justify-content: center;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ad-banner__content--enter {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.ad-banner__content--exit-next {
+	opacity: 0;
+	transform: translateX(-20px);
+}
+
+.ad-banner__content--exit-prev {
+	opacity: 0;
+	transform: translateX(20px);
+}
+
+/* ── Icon Wrap ── */
+.ad-banner__icon-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.ad-banner--gold .ad-banner__icon-wrap { background: rgba(201, 146, 58, 0.2); color: #f5a623; }
+.ad-banner--blue .ad-banner__icon-wrap { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.ad-banner--emerald .ad-banner__icon-wrap { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.ad-banner--rose .ad-banner__icon-wrap { background: rgba(244, 63, 94, 0.2); color: #fb7185; }
+
+/* ── Tag ── */
+.ad-banner__tag {
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: 0.3px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.ad-banner--gold .ad-banner__tag { color: #f5a623; }
+.ad-banner--blue .ad-banner__tag { color: #60a5fa; }
+.ad-banner--emerald .ad-banner__tag { color: #34d399; }
+.ad-banner--rose .ad-banner__tag { color: #fb7185; }
+
+/* ── Divider ── */
+.ad-banner__divider {
+	color: rgba(255, 255, 255, 0.2);
+	font-size: 10px;
+	flex-shrink: 0;
+}
+
+/* ── Headline ── */
+.ad-banner__headline {
+	font-size: 12.5px;
+	font-weight: 700;
+	color: #fff;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 380px;
+	letter-spacing: 0.1px;
+}
+
+/* ── Sub ── */
+.ad-banner__sub {
+	font-size: 11px;
+	color: rgba(255, 255, 255, 0.45);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 240px;
+	display: none; /* shown on wider screens */
+}
+
+@media (min-width: 1024px) {
+	.ad-banner__sub {
+		display: block;
+	}
+}
+
+/* ── CTA Button ── */
+.ad-banner__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 11px;
+	font-weight: 800;
+	text-decoration: none;
+	white-space: nowrap;
+	flex-shrink: 0;
+	letter-spacing: 0.3px;
+	transition: all 0.2s ease;
+	border: 1px solid transparent;
+}
+
+.ad-banner--gold .ad-banner__cta {
+	background: linear-gradient(135deg, #c9923a, #f5a623);
+	color: #fff;
+	box-shadow: 0 2px 10px rgba(201, 146, 58, 0.4);
+}
+
+.ad-banner--gold .ad-banner__cta:hover {
+	background: linear-gradient(135deg, #f5a623, #c9923a);
+	box-shadow: 0 4px 16px rgba(245, 166, 35, 0.5);
+	transform: translateY(-1px);
+}
+
+.ad-banner--blue .ad-banner__cta {
+	background: linear-gradient(135deg, #2563eb, #3b82f6);
+	color: #fff;
+	box-shadow: 0 2px 10px rgba(59, 130, 246, 0.4);
+}
+
+.ad-banner--blue .ad-banner__cta:hover {
+	background: linear-gradient(135deg, #3b82f6, #2563eb);
+	box-shadow: 0 4px 16px rgba(59, 130, 246, 0.5);
+	transform: translateY(-1px);
+}
+
+.ad-banner--emerald .ad-banner__cta {
+	background: linear-gradient(135deg, #059669, #10b981);
+	color: #fff;
+	box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+}
+
+.ad-banner--emerald .ad-banner__cta:hover {
+	background: linear-gradient(135deg, #10b981, #059669);
+	box-shadow: 0 4px 16px rgba(16, 185, 129, 0.5);
+	transform: translateY(-1px);
+}
+
+.ad-banner--rose .ad-banner__cta {
+	background: linear-gradient(135deg, #e11d48, #f43f5e);
+	color: #fff;
+	box-shadow: 0 2px 10px rgba(244, 63, 94, 0.4);
+}
+
+.ad-banner--rose .ad-banner__cta:hover {
+	background: linear-gradient(135deg, #f43f5e, #e11d48);
+	box-shadow: 0 4px 16px rgba(244, 63, 94, 0.5);
+	transform: translateY(-1px);
+}
+
+/* ── Navigation Buttons ── */
+.ad-banner__nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	flex-shrink: 0;
+	position: relative;
+	z-index: 2;
+}
+
+.ad-banner__nav:hover {
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+	transform: scale(1.1);
+}
+
+.ad-banner__nav--prev { margin-left: 8px; }
+.ad-banner__nav--next { margin-right: 8px; }
+
+/* ── Dots ── */
+.ad-banner__dots {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	position: relative;
+	z-index: 2;
+	flex-shrink: 0;
+}
+
+.ad-banner__dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.25);
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 0;
+}
+
+.ad-banner__dot--active {
+	width: 16px;
+	border-radius: 3px;
+}
+
+.ad-banner--gold .ad-banner__dot--active { background: #f5a623; }
+.ad-banner--blue .ad-banner__dot--active { background: #3b82f6; }
+.ad-banner--emerald .ad-banner__dot--active { background: #10b981; }
+.ad-banner--rose .ad-banner__dot--active { background: #f43f5e; }
+
+/* ── Progress Bar ── */
+.ad-banner__progress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.07);
+	z-index: 3;
+}
+
+.ad-banner__progress-bar {
+	height: 100%;
+	width: 0%;
+	animation: ad-progress 5s linear forwards;
+}
+
+.ad-banner--gold .ad-banner__progress-bar { background: linear-gradient(90deg, #c9923a, #f5a623); }
+.ad-banner--blue .ad-banner__progress-bar { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+.ad-banner--emerald .ad-banner__progress-bar { background: linear-gradient(90deg, #059669, #10b981); }
+.ad-banner--rose .ad-banner__progress-bar { background: linear-gradient(90deg, #e11d48, #f43f5e); }
+
+@keyframes ad-progress {
+	from { width: 0%; }
+	to { width: 100%; }
+}
+
+/* ── Close Button ── */
+.ad-banner__close {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: rgba(255, 255, 255, 0.4);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	flex-shrink: 0;
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 5;
+}
+
+.ad-banner__close:hover {
+	background: rgba(255, 255, 255, 0.18);
+	color: #fff;
+	transform: translateY(-50%) scale(1.15);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+	.ad-banner__headline {
+		max-width: 200px;
+		font-size: 11.5px;
+	}
+
+	.ad-banner__tag {
+		font-size: 10px;
+	}
+
+	.ad-banner__divider {
+		display: none;
+	}
+
+	.ad-banner__nav {
+		display: none;
+	}
+}
+
+@media (max-width: 480px) {
+	.ad-banner__headline {
+		max-width: 150px;
+		font-size: 11px;
+	}
+
+	.ad-banner__dots {
+		display: none;
+	}
+}
